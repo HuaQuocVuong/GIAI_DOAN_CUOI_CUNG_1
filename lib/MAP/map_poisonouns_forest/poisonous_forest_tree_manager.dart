@@ -2,7 +2,7 @@ import 'package:flame/game.dart';
 
 import 'package:update1/MAP/tree_manager_base.dart';
 
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
 // Quản lý cây, vị trí cây trong khu rừng độc (Poisonous Forest)
 // Kế thừa từ TreeManagerBase và triển khai logic cụ thể cho map Poisonous Forest

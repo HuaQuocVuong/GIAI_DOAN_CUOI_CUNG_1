@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 import 'package:update1/processing_function/my_game.dart';
 
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 
 import 'package:update1/boss_S1/animation_bullet_boss.dart';
 import 'package:update1/boss_S1/animation_boss.dart';

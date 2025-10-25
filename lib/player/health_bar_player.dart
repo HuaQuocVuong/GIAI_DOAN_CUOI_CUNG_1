@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 
 /// Thanh máu cho PlayerTank - sử dụng ảnh sprite
 class HealthBar extends PositionComponent {

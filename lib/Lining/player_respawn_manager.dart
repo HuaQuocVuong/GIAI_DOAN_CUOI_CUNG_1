@@ -5,7 +5,7 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 
 
 /// Quản lý hồi sinh cho PlayerTank - ĐÓNG GÓI toàn bộ logic hồi sinh

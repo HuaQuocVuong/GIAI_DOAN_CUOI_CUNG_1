@@ -7,8 +7,8 @@ import 'package:flame/input.dart';
 
 import 'package:flutter/services.dart';
 
-import 'package:update1/player/bullet_player.dart';
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_bullets_player.dart';
+import 'package:update1/player/handlings_player.dart';
 import 'package:update1/player/click_marker.dart';
 
 import 'package:update1/MAP/map_manager.dart';

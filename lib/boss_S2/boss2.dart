@@ -1,10 +1,10 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:update1/boss_S2/attack_boss2.dart';
-import 'package:update1/player/bullet_player.dart';
+import 'package:update1/player/handlings_bullets_player.dart';
 import 'package:update1/processing_function/my_game.dart';
 import 'package:update1/boss_S2/animation_boss2.dart';
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 
@@ -37,7 +37,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
   
   bool _isAttacking = false;
   bool _isFastPhase = false; // Đã chuyển sang phase chạy nhanh chưa
-  
+
   Boss2({
     required Vector2 position,
     required Vector2 size,
@@ -65,6 +65,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       anchor: Anchor.center,
     ));
     //debugMode = true;
+
     // THÊM THANH MÁU CHO BOSS2
     final healthBar = Boss2HealthBar(boss: this);
     gameRef.add(healthBar); 
@@ -130,11 +131,9 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     // Nhận sát thương từ đạn player
     takeDamage(bullet.damage);
     
-    // Xóa đạn sau khi trúng
+    // Xóa đạn player sau khi trúng
     bullet.removeFromParent();
   }
-
-
 
   // Phương thức kiểm tra player có chết không
   bool _isPlayerDead() {
@@ -206,74 +205,103 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     
     if (distanceToPlayer <= 150) {
       _isAttacking = true;
-      
-      // Chuyển animation tấn công
-      animation = isFacingRight ? animations.attackRight : animations.attackLeft;
-      
-      // Tạo đòn đánh
-      final attack = Boss2Attack(
-        position: position.clone(),
-        isFacingRight: isFacingRight,
-      );
-      
-      gameRef.add(attack);
-      
-      // Reset trạng thái tấn công sau khi animation kết thúc
-      Future.delayed(Duration(milliseconds: 750), () {
-        _isAttacking = false;
-        if (!_isPlayerDead()) {
-          _isFastPhase = false;   // Reset về phase đi bộ
-          _currentMoveSpeed = _normalSpeed;  // Reset tốc độ
-          _phaseTimer = 0;                // Reset timer để đếm lại 3 giây
-
-          // RESET VỀ ANIMATION ĐI BỘ SAU KHI TẤN CÔNG
-          animation = isFacingRight ? animations.walkRight : animations.walkLeft;
-        } else {
-          // Nếu player đã chết, chuyển sang idle
-          animation = isFacingRight ? animations.idleRight : animations.idleLeft; 
-        }
-      });
+      _performAttackCombo(); // THỰC HIỆN COMBO 2 ĐÒN LIÊN TIẾP
     } else {
       _isAttacking = false;
     }
-
   }
+  // THÊM PHƯƠNG THỨC THỰC HIỆN COMBO 2 ĐÒN
+  void _performAttackCombo() {
 
-  void _updateFacingDirection(double directionX) {
-    if (directionX > 0 && !isFacingRight) {
-      isFacingRight = true;
-    } else if (directionX < 0 && isFacingRight) {
-      isFacingRight = false;
+      // Chuyển animation tấn công
+      animation = isFacingRight ? animations.attackRight : animations.attackLeft;
+      
+      // Tạo đòn đánh thứ nhất với damage = 40
+      final attack1 = Boss2Attack.firstAttack(
+        position: position.clone(),
+        isFacingRight: isFacingRight,
+      );
+      gameRef.add(attack1);
+
+      // Reset trạng thái tấn công sau khi animation kết thúc
+      Future.delayed(Duration(milliseconds: 750), () {
+        if (isDead || _isDying || _isPlayerDead()) {
+          _isAttacking = false;
+          return;
+        }
+
+        // ĐÒN TẤN CÔNG THỨ HAI
+        animation = isFacingRight ? animations.attackRight2 : animations.attackLeft2;
+        
+        // Tạo đòn đánh thứ hai với damage = 80 (gấp đôi)
+        final attack2 = Boss2Attack.secondAttack(
+          position: position.clone(),
+          isFacingRight: isFacingRight,
+        );
+        gameRef.add(attack2);
+
+        // SAU KHI COMBO HOÀN THÀNH
+        Future.delayed(Duration(milliseconds: 600), () {
+          _isAttacking = false;
+          if (!_isPlayerDead()) {
+            _resetToNormalMovement();
+          } else {
+            animation = isFacingRight ? animations.idleRight : animations.idleLeft;
+          }
+        });
+      });
     }
-  }
 
-  // THÊM PHƯƠNG THỨC NHẬN SÁT THƯƠNG
-  void takeDamage(double damage) {
-    if (isDead) return;
-    
-    health -= damage;
-    if (health <= 0) {
-      health = 0;
-      die();
-    }
-  }
-  // THÊM PHƯƠNG THỨC CHẾT
-  void die() {
-    if (isDead || _isDying) return; // THÊM KIỂM TRA _isDying
-    
-    isDead = true;
-    _isDying = true; // ĐÁNH DẤU ĐANG CHẾT
-    _isAttacking = false;
-    
-    // Chuyển animation chết
-    animation = isFacingRight ? animations.dieRight : animations.dieLeft;
-    animation!.loop = false;
-    
-    // Vô hiệu hóa hitbox
-    for (final component in children.toList()) {
-      if (component is Hitbox) {
-        remove(component);
+    // THÊM PHƯƠNG THỨC RESET VỀ DI CHUYỂN BÌNH THƯỜNG
+    void _resetToNormalMovement() {
+      _isFastPhase = false;   // Reset về phase đi bộ
+      _currentMoveSpeed = _normalSpeed;  // Reset tốc độ
+      _phaseTimer = 0;                // Reset timer để đếm lại 3 giây
+
+      // RESET VỀ ANIMATION ĐI BỘ SAU KHI TẤN CÔNG
+      if (!_isPlayerDead()) {
+        animation = isFacingRight ? animations.walkRight : animations.walkLeft;
+      } else {
+        animation = isFacingRight ? animations.idleRight : animations.idleLeft;
       }
+    }
+
+
+    void _updateFacingDirection(double directionX) {
+      if (directionX > 0 && !isFacingRight) {
+        isFacingRight = true;
+      } else if (directionX < 0 && isFacingRight) {
+        isFacingRight = false;
+      }
+    }
+
+    // THÊM PHƯƠNG THỨC NHẬN SÁT THƯƠNG
+    void takeDamage(double damage) {
+      if (isDead) return;
+      
+      health -= damage;
+      if (health <= 0) {
+        health = 0;
+        die();
+      }
+    }
+    // THÊM PHƯƠNG THỨC CHẾT
+    void die() {
+      if (isDead || _isDying) return; // THÊM KIỂM TRA _isDying
+      
+      isDead = true;
+      _isDying = true; // ĐÁNH DẤU ĐANG CHẾT
+      _isAttacking = false;
+      
+      // Chuyển animation chết
+      animation = isFacingRight ? animations.dieRight : animations.dieLeft;
+      animation!.loop = false;
+      
+      // Vô hiệu hóa hitbox
+      for (final component in children.toList()) {
+        if (component is Hitbox) {
+          remove(component);
+        }
     }
     
     // Tự động xóa sau khi animation chết kết thúc
@@ -285,7 +313,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     });
   }
 
-  // Phương thức để reset boss (nếu cần)
+  // Phương thức để reset boss 
   void resetBoss() {
     _isFastPhase = false;
     _currentMoveSpeed = _normalSpeed;

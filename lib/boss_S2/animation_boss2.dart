@@ -15,6 +15,9 @@ class Boss2Animations {
   late SpriteAnimation attackRight;
   late SpriteAnimation attackLeft;
 
+  late SpriteAnimation attackRight2;
+  late SpriteAnimation attackLeft2;
+
   late SpriteAnimation dieRight;
   late SpriteAnimation dieLeft;
 
@@ -36,6 +39,11 @@ class Boss2Animations {
 
     attackRight = await _createAttackRight();
     attackLeft = await _createAttackLeft();
+
+    attackRight2 = await _createAttackRight2();
+    attackLeft2 = await _createAttackLeft2();
+
+
     dieRight = await _createDieRight();
     dieLeft = await _createDieLeft();
     
@@ -243,6 +251,41 @@ class Boss2Animations {
       loop: true);
   }
 
+  Future <SpriteAnimation> _createAttackRight2() async {
+    final sprites = <Sprite> [];
+
+    final sprite1 = await Sprite.load('tg2_atr2.1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('tg2_atr2.2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('tg2_atr2.3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('tg2_atr2.4.png');
+    sprites.add(sprite4);
+
+    return SpriteAnimation.spriteList(
+      sprites, 
+      stepTime: 0.10,
+      loop: true);
+  }
+  Future <SpriteAnimation> _createAttackLeft2() async {
+    final sprites = <Sprite> [];
+
+    final sprite1 = await Sprite.load('tg2_atl2.1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('tg2_atl2.2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('tg2_atl2.3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('tg2_atl2.4.png');
+    sprites.add(sprite4);
+    
+    return SpriteAnimation.spriteList(
+      sprites, 
+      stepTime: 0.10,
+      loop: true);
+  }
+
   Future <SpriteAnimation> _createDieRight() async {
     final sprites = <Sprite> [];
 
@@ -315,10 +358,6 @@ class Boss2Animations {
       loop: true);
   }
 
-
-
-
-
   // Phương thức tiện ích để lấy animation theo tên
   SpriteAnimation? getAnimationByName(String name) {
     switch (name) {
@@ -341,6 +380,11 @@ class Boss2Animations {
         return attackRight;
       case 'attackLeft':
         return attackLeft;
+
+      case 'attackRight2':
+        return attackRight2;
+      case 'attackLeft2':
+        return attackLeft2;
 
       case 'dieRight':
       return dieRight;

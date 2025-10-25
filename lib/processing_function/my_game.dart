@@ -3,15 +3,17 @@ import 'package:flame/input.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 
-import 'package:update1/MAP/map_manager.dart';
-import 'package:update1/processing_function/player_controller.dart';
+
+import 'package:update1/player/player_controller.dart';
+
 import 'package:update1/Lining/spawn_lining_manager.dart';
+
+import 'package:update1/MAP/map_manager.dart';
 import 'package:update1/MAP/tree_manager_base.dart';
+import 'package:update1/MAP/status_maps/map_status.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
-import 'package:update1/MAP/map_status.dart';
-import 'package:update1/MAP/tree.dart';
-
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 
 import 'package:update1/boss_S1/boss1.dart';
 import 'package:update1/boss_S1/animation_boss.dart';

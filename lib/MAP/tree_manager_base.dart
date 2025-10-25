@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
 // Abstract class quản lý cây trong game - dùng abstract để định nghĩa interface
 abstract class TreeManagerBase {

@@ -2,7 +2,7 @@ import 'package:flame/game.dart';
 
 import 'package:update1/MAP/tree_manager_base.dart';
 
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
 
 

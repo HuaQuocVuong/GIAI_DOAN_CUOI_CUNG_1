@@ -15,8 +15,8 @@ import 'package:update1/boss_S1/health_bar_is_boss.dart';
 import 'package:update1/boss_S2/boss2.dart';
 
 
-import 'package:update1/MAP/map_status.dart';
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/MAP/status_maps/map_status.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
 enum GameMapType {
   forest,

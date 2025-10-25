@@ -6,7 +6,7 @@ import 'package:update1/processing_function/my_game.dart';
 
 import 'package:update1/Lining/animation_lining.dart';
 
-import 'package:update1/player/components_player.dart';
+import 'package:update1/player/handlings_player.dart';
 
 class DangerZone extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {

@@ -5,12 +5,16 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:update1/boss_S2/animation_boss2.dart';
 
 import 'package:update1/processing_function/my_game.dart';
-import 'package:update1/player/components_player.dart';
-import 'package:update1/MAP/tree.dart';
+import 'package:update1/player/handlings_player.dart';
+import 'package:update1/MAP/tree_animation.dart';
 
 class Boss2Attack extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
-  final int damage = 40;  // Sát thương gây ra cho player
+  final int damage ;  // Sát thương gây ra cho player
+  final int attackType;
+
+  static const int firstAttackDamage = 35;
+  static const int secondAttackDamage = 55;
 
   late Boss2Animations animations;   // Quản lý animations của đòn đánh
   final bool isFacingRight; // Hướng quay của animation (phải/trái)
@@ -21,11 +25,15 @@ class Boss2Attack extends SpriteAnimationComponent
   Boss2Attack({
     required Vector2 position,  // Vị trí khởi tạo đòn đánh
     required this.isFacingRight,  // Hướng animation
+    required this.attackType,
+    required this.damage,
+
   }) : super(
     anchor: Anchor.center,  // Điểm neo ở trung tâm
     position: position,  // Vị trí ban đầu (tại boss)
     size: Vector2(120, 100),  // Kích thước đòn đánh
   ) {
+
     // Điều chỉnh vị trí dựa trên hướng
     if (isFacingRight) {
       this.position += Vector2(150, -30); // Vị trí khi tấn công bên phải
@@ -35,16 +43,49 @@ class Boss2Attack extends SpriteAnimationComponent
 
     // Thêm hitbox cho đòn đánh
     add(RectangleHitbox(
-      size: Vector2(100, 200),
+      size: Vector2(100, 200), 
       position: Vector2(0, 150),
       anchor: Anchor.center,
     ));
   }
 
+  // PHƯƠNG THỨC TẠO ĐÒN TẤN CÔNG THỨ NHẤT
+  factory Boss2Attack.firstAttack({
+    required Vector2 position,
+    required bool isFacingRight,
+  }) {
+    return Boss2Attack(
+      position: position,
+      isFacingRight: isFacingRight,
+      attackType: 1,
+      damage: firstAttackDamage,
+    );
+  }
+
+  // PHƯƠNG THỨC TẠO ĐÒN TẤN CÔNG THỨ HAI
+  factory Boss2Attack.secondAttack({
+    required Vector2 position,
+    required bool isFacingRight,
+  }) {
+    return Boss2Attack(
+      position: position,
+      isFacingRight: isFacingRight,
+      attackType: 2,
+      damage: secondAttackDamage,
+    );
+  }
+
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    FlameAudio.play('swordhit1.mp3');
+
+    // Âm thanh khác nhau cho mỗi loại đòn tấn công
+    if (attackType == 1) {
+      FlameAudio.play('swordhit1.mp3');
+    } else {
+      FlameAudio.play('swordhit1.mp3'); // Âm thanh khác cho đòn 2
+    }
   }
   
   @override
@@ -90,8 +131,8 @@ class Boss2Attack extends SpriteAnimationComponent
     
     // GÂY SÁT THƯƠNG CHO PLAYER
     player.takeDamage(damage);
-    
-  
+
+    _playHitEffect();
   }
 
   // Xử lý khi trúng vật cản
