@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:update1/boss_S1/boss1.dart';
+import 'package:update1/boss_S1/handlings_boss1.dart';
 
 /// Thanh máu cho Boss - sử dụng ảnh sprite
 class BossHealthBar extends PositionComponent {

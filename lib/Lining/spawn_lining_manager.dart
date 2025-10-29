@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 import 'package:update1/Lining/animation_lining.dart';
-import 'package:update1/Lining/lining.dart';
+import 'package:update1/Lining/handlings_lining.dart';
 
 import 'package:update1/Lining/spawn_lining_manager.dart';
 import 'package:update1/processing_function/my_game.dart';

@@ -11,7 +11,7 @@ class BulletAnimations {
     bulletFlyLeft = await _createBulletFlyLeftAnimation();
     //bulletHit = await _createBulletHitAnimation();
   }
-
+  
   Future<SpriteAnimation> _createBulletFlyRightAnimation() async {
     final sprites = <Sprite>[];
     

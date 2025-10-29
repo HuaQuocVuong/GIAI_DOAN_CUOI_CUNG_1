@@ -6,6 +6,28 @@ class PoisonousDecorManager {
   static final _decorConfigs = [
     // Format: [x, y, type, width, height]
     // Background water tĩnh
+
+    //Base tree
+    _DecorData(90, 570, GroundRocksType.type7, 142, 147), 
+
+    _DecorData(250, 170, GroundRocksType.type7, 142, 147), 
+    _DecorData(420, 190, GroundRocksType.type7, 142, 147),
+    _DecorData(570, 150, GroundRocksType.type7, 142, 147), 
+
+    _DecorData(1150, 130, GroundRocksType.type7, 142, 147), 
+    _DecorData(1290, 190, GroundRocksType.type7, 142, 147), 
+    _DecorData(1470, 160, GroundRocksType.type7, 142, 147), 
+    _DecorData(1600, 240, GroundRocksType.type7, 142, 147), 
+    _DecorData(1770, 200, GroundRocksType.type7, 116, 147), 
+
+    _DecorData(1150, 630, GroundRocksType.type7, 142, 147), 
+    _DecorData(1360, 670, GroundRocksType.type7, 142, 147), 
+    _DecorData(1600, 670, GroundRocksType.type7, 142, 147), 
+    _DecorData(1800, 620, GroundRocksType.type7, 142, 147),
+
+
+
+
     _DecorData(90, 150, GroundRocksType.type1, 150, 150),
     _DecorData(90, 150, GroundRocksType.type3, 200, 200),
 
@@ -17,18 +39,41 @@ class PoisonousDecorManager {
     _DecorData(1620, 850, GroundRocksType.type5, 608, 216),
 
 
+    _DecorData(920, 140, GroundRocksType.type12, 243, 250),
+
+    _DecorData(200, 700, GroundRocksType.type8, 440, 440),
+
+
+    _DecorData(570, 630, GroundRocksType.type15, 300, 300),
+
+
 
     
-    _DecorData(970, 870, GroundRocksType.type1, 500, 180),
+    _DecorData(970, 883, GroundRocksType.type1, 500, 130),
     _DecorData(740, 891, GroundRocksType.type6, 70, 138),
     _DecorData(1200, 880, GroundRocksType.type6, 78, 147),
-    _DecorData(970, 870, GroundRocksType.type10, 70, 12),
-
-    
-
-    
+    _DecorData(970, 870, GroundRocksType.type10, 300, 65),
 
 
+    _DecorData(843, 800, GroundRocksType.type11, 96, 83), 
+    _DecorData(770, 800, GroundRocksType.type11, 96, 83),
+    _DecorData(916, 800, GroundRocksType.type11, 96, 83), 
+    _DecorData(989, 800, GroundRocksType.type11, 96, 83),
+    _DecorData(1062, 800, GroundRocksType.type11, 96, 83), 
+    _DecorData(1135, 800, GroundRocksType.type11, 96, 83),
+
+
+
+
+
+
+    //_DecorData(, GroundRocksType.type7, 59, 63),
+    //_DecorData(, GroundRocksType.type7, 59, 63), 
+    //_DecorData(, GroundRocksType.type7, 59, 63), 
+    //_DecorData(, GroundRocksType.type7, 59, 63), 
+    //_DecorData(, GroundRocksType.type7, 59, 63), 
+
+  
 
   ];
 
@@ -67,7 +112,10 @@ class PoisonousDecorManager {
       //Stone
       case GroundRocksType.type6:
         return 0.1;
-    
+      case GroundRocksType.type7:
+        return 0.1;
+      case GroundRocksType.type8:
+        return 0.1;
 
       //Water 
       case GroundRocksType.type10:
@@ -77,7 +125,8 @@ class PoisonousDecorManager {
       case GroundRocksType.type12:
         return 0.1;
 
-      
+      case GroundRocksType.type15:
+        return 0.1;
       
     }
   }
@@ -103,15 +152,22 @@ class PoisonousDecorManager {
       //Stone   
       case GroundRocksType.type6:
           return -1;
-   
+      //base tree
+      case GroundRocksType.type7:
+          return -1;
 
-
+      case GroundRocksType.type8:
+          return -1;
 
       case GroundRocksType.type10:
         return -1;
       case GroundRocksType.type11:
         return -1;
       case GroundRocksType.type12:
+        return -1;
+
+
+      case GroundRocksType.type15:
         return -1;
     }
   }

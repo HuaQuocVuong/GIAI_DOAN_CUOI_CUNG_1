@@ -15,15 +15,12 @@ import 'package:update1/MAP/tree_animation.dart';
 
 import 'package:update1/player/handlings_player.dart';
 
-import 'package:update1/boss_S1/boss1.dart';
+import 'package:update1/boss_S1/handlings_boss1.dart';
 import 'package:update1/boss_S1/animation_boss.dart';
 import 'package:update1/boss_S1/health_bar_is_boss.dart';
 
-
-import 'package:update1/boss_S2/boss2.dart';
+import 'package:update1/boss_S2/handlings_boss2.dart';
 import 'package:update1/boss_S2/animation_boss2.dart';
-
-
 
 //Lớp MyGame là lớp chính của game.
 //Kế thừa từ FlameGame quản lý toàn bộ vòng đời, render, update
@@ -32,7 +29,6 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   late PlayerTank player;            // người chơi
   late PlayerController playerController; // Controller xử lý input
   late DangerZoneSpawner dangerZoneSpawner; // Thêm spawn 
-
   late MapManager mapManager;
 
   @override

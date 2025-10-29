@@ -11,8 +11,12 @@ enum GroundRocksType {
   type5,  
   
   type6,
+  type7,
+  type8,
 
   type10, type11, type12, //Water
+
+  type15,
 }
 
 class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
@@ -41,7 +45,7 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
 
       // Animation nước động - kích thước 80x60  
       case GroundRocksType.type2:
-        return Vector2(120, 12); 
+        return Vector2(540, 70); 
         
       case GroundRocksType.type3:
         return Vector2(64, 64); 
@@ -55,18 +59,30 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
       case GroundRocksType.type6:
         return Vector2(66, 32);
 
+      case GroundRocksType.type7: //base tree
+        return Vector2(59, 63);
+
+      case GroundRocksType.type8: //Lich shadow
+        return Vector2(256, 256);
+
 
 
       //Water
       case GroundRocksType.type10:
-        return Vector2(70, 12); 
+        return Vector2(300, 65); 
+
       case GroundRocksType.type11:
-        return Vector2(290, 64);
+        return Vector2(56, 43);
+
       case GroundRocksType.type12:
-        return Vector2(290, 64); 
-  
-    
-    
+        return Vector2(243, 250); 
+
+
+      case GroundRocksType.type15:
+        return Vector2(200, 200); 
+
+
+
     }
   }
 
@@ -99,12 +115,12 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
        animation = await _createRockAnimation6();
        break;
 
-     
-
-
-
-
-
+      case GroundRocksType.type7:
+       animation = await _createRockAnimation7();
+       break;
+      case GroundRocksType.type8:
+       animation = await _createRockAnimation8();
+       break;
 
 
       //Water
@@ -116,6 +132,12 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
        break;
       case GroundRocksType.type12:
        animation = await _createRockAnimation12();
+       break;
+
+
+
+      case GroundRocksType.type15:
+       animation = await _createRockAnimation15();
        break;
     }
     position = rockPosition;
@@ -141,17 +163,17 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
     final sprites = <Sprite>[];
 
 
-    final sprite1 = await Sprite.load('water_detilazatio1.png');
+    final sprite1 = await Sprite.load('water_detilazatio1.1png');
     sprites.add(sprite1);
-    final sprite2 = await Sprite.load('water_detilazatio2.png');
+    final sprite2 = await Sprite.load('water_detilazatio1.2.png');
     sprites.add(sprite2);
-    final sprite3 = await Sprite.load('water_detilazatio3.png');
+    final sprite3 = await Sprite.load('water_detilazatio1.3.png');
     sprites.add(sprite3);
-    final sprite4 = await Sprite.load('water_detilazatio4.png');
+    final sprite4 = await Sprite.load('water_detilazatio1.4.png');
     sprites.add(sprite4);
-    final sprite5 = await Sprite.load('water_detilazatio5.png');
+    final sprite5 = await Sprite.load('water_detilazatio1.5.png');
     sprites.add(sprite5);
-    final sprite6 = await Sprite.load('water_detilazatio6.png');
+    final sprite6 = await Sprite.load('water_detilazatio1.6.png');
     sprites.add(sprite6);
     
     return SpriteAnimation.spriteList(
@@ -233,23 +255,47 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
       loop: true,
     );
   }
+  Future<SpriteAnimation> _createRockAnimation7() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('base_tree.png');
+    sprites.add(sprite1);
+
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+  Future<SpriteAnimation> _createRockAnimation8() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('Lich_shadow.png');
+    sprites.add(sprite1);
+
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
   
 
 //Water
   Future<SpriteAnimation> _createRockAnimation10() async {
     final sprites = <Sprite>[];
 
-    final sprite1 = await Sprite.load('water_detilazatio1.1.1.png');
+    final sprite1 = await Sprite.load('water_detilazatio1.1.png');
     sprites.add(sprite1);
-    final sprite2 = await Sprite.load('water_detilazatio1.1.2.png');
+    final sprite2 = await Sprite.load('water_detilazatio1.2.png');
     sprites.add(sprite2);
-    final sprite3 = await Sprite.load('water_detilazatio1.1.3.png');
+    final sprite3 = await Sprite.load('water_detilazatio1.3.png');
     sprites.add(sprite3);
-    final sprite4 = await Sprite.load('water_detilazatio1.1.4.png');
+    final sprite4 = await Sprite.load('water_detilazatio1.4.png');
     sprites.add(sprite4);
-    final sprite5 = await Sprite.load('water_detilazatio1.1.5.png');
+    final sprite5 = await Sprite.load('water_detilazatio1.5.png');
     sprites.add(sprite5);
-    final sprite6 = await Sprite.load('water_detilazatio1.1.6.png');
+    final sprite6 = await Sprite.load('water_detilazatio1.6.png');
     sprites.add(sprite6);
 
 
@@ -262,6 +308,17 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
   Future<SpriteAnimation> _createRockAnimation11() async {
     final sprites = <Sprite>[];
 
+    final sprite1 = await Sprite.load('water_hole1.1.1.1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('water_hole1.1.1.2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('water_hole1.1.1.3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('water_hole1.1.1.4.png');
+    sprites.add(sprite4);
+    final sprite5 = await Sprite.load('water_hole1.1.1.5.png');
+    sprites.add(sprite5);
+
 
     return SpriteAnimation.spriteList(
       sprites,
@@ -272,6 +329,19 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
   Future<SpriteAnimation> _createRockAnimation12() async {
     final sprites = <Sprite>[];
 
+    final sprite1 = await Sprite.load('The_Temple_of_Teleportation1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('The_Temple_of_Teleportation2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('The_Temple_of_Teleportation3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('The_Temple_of_Teleportation4.png');
+    sprites.add(sprite4);
+    final sprite5 = await Sprite.load('The_Temple_of_Teleportation5.png');
+    sprites.add(sprite5);
+    final sprite6 = await Sprite.load('The_Temple_of_Teleportation6.png');
+    sprites.add(sprite6);
+
 
     return SpriteAnimation.spriteList(
       sprites,
@@ -279,6 +349,17 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
       loop: true,
     );
   }
-  
 
+  Future<SpriteAnimation> _createRockAnimation15() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('Ruin_shadow2_1.png');
+    sprites.add(sprite1);
+
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
 }

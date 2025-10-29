@@ -11,7 +11,7 @@ import 'package:update1/processing_function/my_game.dart';
 import 'package:update1/player/click_marker.dart';
 
 import 'package:update1/player/health_bar_player.dart';
-import 'package:update1/Lining/player_respawn_manager.dart'; 
+import 'package:update1/player/player_respawn_manager.dart'; 
 import 'package:update1/player/animation_player.dart';
 
 // Định hướng của nhân vật: left, right

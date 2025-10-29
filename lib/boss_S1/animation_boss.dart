@@ -6,7 +6,7 @@ class BossAnimations {
   late SpriteAnimation attackLeft;
   late SpriteAnimation attackRight;
 
-    late SpriteAnimation attackLeft2;
+  late SpriteAnimation attackLeft2;
   late SpriteAnimation attackRight2;
 
   late SpriteAnimation deathLeft;  
@@ -46,8 +46,6 @@ class BossAnimations {
     sprites.add(sprite7);
     final sprite8 = await Sprite.load('tg1_idlel8.png');
     sprites.add(sprite8);
-
-
 
     return SpriteAnimation.spriteList(
       sprites,

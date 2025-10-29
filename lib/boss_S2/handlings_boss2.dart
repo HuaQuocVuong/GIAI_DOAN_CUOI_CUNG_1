@@ -216,7 +216,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       // Chuyển animation tấn công
       animation = isFacingRight ? animations.attackRight : animations.attackLeft;
       
-      // Tạo đòn đánh thứ nhất với damage = 40
+      // Tạo đòn đánh thứ nhất 
       final attack1 = Boss2Attack.firstAttack(
         position: position.clone(),
         isFacingRight: isFacingRight,
@@ -233,7 +233,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
         // ĐÒN TẤN CÔNG THỨ HAI
         animation = isFacingRight ? animations.attackRight2 : animations.attackLeft2;
         
-        // Tạo đòn đánh thứ hai với damage = 80 (gấp đôi)
+        // Tạo đòn đánh thứ hai 
         final attack2 = Boss2Attack.secondAttack(
           position: position.clone(),
           isFacingRight: isFacingRight,

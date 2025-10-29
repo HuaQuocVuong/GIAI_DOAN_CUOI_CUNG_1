@@ -6,7 +6,7 @@ import 'package:update1/processing_function/my_game.dart';
 
 import 'package:update1/player/animation_bullet_player.dart';
 
-import 'package:update1/boss_S1/boss1.dart';
+import 'package:update1/boss_S1/handlings_boss1.dart';
 
 class Bullet extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
