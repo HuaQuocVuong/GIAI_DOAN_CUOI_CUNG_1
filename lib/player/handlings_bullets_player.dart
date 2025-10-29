@@ -17,7 +17,7 @@ class Bullet extends SpriteAnimationComponent
   double _stuckTime = 0.0;
   bool _hasMoved = false;
 
-  final double damage = 80; //Dame bullet
+  final double damage = 8000; //Dame bullet
 
   late BulletAnimations animations; // THÊM ANIMATIONS
   final bool isFacingRight; // THÊM BIẾN XÁC ĐỊNH HƯỚNG

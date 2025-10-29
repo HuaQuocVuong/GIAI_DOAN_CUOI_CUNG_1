@@ -8,7 +8,7 @@ enum TreeType {
   type1, type2, type3,  //Kiểu cây 1
   type4, type5, type6,  //Kiểu cây 2
   type7, type8, type9,  //Kiểu cây 3
-  type10
+  type10, type11, type12,
 }
 class TreeComponent extends SpriteAnimationComponent with HasGameRef {
   final Vector2 treePosition;
@@ -55,6 +55,13 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
             //birt fly
             case TreeType.type10:
             return Vector2(220, 220);
+
+            //birt fly
+            case TreeType.type11:
+            return Vector2(50, 50);
+
+            case TreeType.type12:
+            return Vector2(80, 80);
           }
         }
 
@@ -103,12 +110,11 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
       case TreeType.type10:
       animation = await _createBirdFly1();
 
+      case TreeType.type11:
+      animation = await _createfairys();
 
-
-  
-
-
-
+      case TreeType.type12:
+      animation = await _createchest();
 
 
     }
@@ -419,6 +425,64 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
     final sprite16 = await Sprite.load('bird_fly16.png');
     sprites.add(sprite16);
 
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+
+  Future<SpriteAnimation> _createfairys() async {
+    final sprites = <Sprite>[];
+    
+    final sprite1 = await Sprite.load('fairys1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('fairys2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('fairys3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('fairys4.png');
+    sprites.add(sprite4);
+    final sprite5 = await Sprite.load('fairys5.png');
+    sprites.add(sprite5);
+    final sprite6 = await Sprite.load('fairys6.png');
+    sprites.add(sprite6);
+    final sprite7 = await Sprite.load('fairys7.png');
+    sprites.add(sprite7);
+    final sprite8 = await Sprite.load('fairys8.png');
+    sprites.add(sprite8);
+    final sprite9 = await Sprite.load('fairys9.png');
+    sprites.add(sprite9);
+    final sprite10 = await Sprite.load('fairys10.png');
+    sprites.add(sprite10);
+    final sprite11 = await Sprite.load('fairys11.png');
+    sprites.add(sprite11);
+    final sprite12 = await Sprite.load('fairys12.png');
+    sprites.add(sprite12);
+
+
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+
+  Future<SpriteAnimation> _createchest() async {
+    final sprites = <Sprite>[];
+    
+    final sprite1 = await Sprite.load('chest1.png');
+    sprites.add(sprite1);
+    final sprite2 = await Sprite.load('chest2.png');
+    sprites.add(sprite2);
+    final sprite3 = await Sprite.load('chest3.png');
+    sprites.add(sprite3);
+    final sprite4 = await Sprite.load('chest4.png');
+    sprites.add(sprite4);
+    final sprite5 = await Sprite.load('chest5.png');
+    sprites.add(sprite5);
+    final sprite6 = await Sprite.load('chest6.png');
+    sprites.add(sprite6);
     return SpriteAnimation.spriteList(
       sprites,
       stepTime: animationSpeed,

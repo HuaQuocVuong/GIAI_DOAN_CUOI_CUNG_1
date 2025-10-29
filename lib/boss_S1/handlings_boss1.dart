@@ -9,6 +9,8 @@ import 'package:update1/boss_S1/animation_bullet_boss.dart';
 import 'package:update1/boss_S1/health_bar_is_boss.dart';
 import 'package:update1/boss_S1/bullet_boss.dart';
 
+import 'package:update1/teleportation_stone.dart';
+
 class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
   // Animation controller
   late BossAnimations animations;
@@ -204,6 +206,23 @@ class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
         remove(component); // Xóa hitbox
       }
     }
+
+    // THÊM VIÊN ĐÁ RƠI RA SAU 4 GIÂY
+    Future.delayed(Duration(seconds: 5), () {
+      // THÊM VIÊN ĐÁ RƠI RA KHI BOSS CHẾT
+      _spawnTeleportationStone();
+    });
+  }
+
+  // HÀM TẠO VIÊN ĐÁ TELEPORT
+  void _spawnTeleportationStone() {
+    final stone = TeleportationStone(
+      position: Vector2(1635, 320), // Vị trí rơi ngay tại boss
+      size: Vector2(120, 120), // Kích thước viên đá
+    );
+  
+  // Thêm viên đá vào game
+  gameRef.add(stone);
   }
   // Getter để kiểm tra trạng thái
   int get currentAttackType => _currentAttackType;
