@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
 
 import 'package:update1/main.dart';
 
@@ -46,6 +47,12 @@ class MapManager {
   }
   
   Future<void> _removeCurrentMap() async {
+
+     // XÓA TẤT CẢ ĐÁ DỊCH CHUYỂN KHI CHUYỂN MAP
+    final stones = game.children.whereType<TeleportationStone>().toList();
+    for (final stone in stones) {
+      stone.removeFromParent();
+    }
 
     // REMOVE TẤT CẢ CÂY TRƯỚC KHI CHUYỂN MAP
     final trees = game.children.whereType<TreeComponent>().toList();
@@ -120,7 +127,8 @@ class MapManager {
       position: Vector2(1700, 300),
       size: Vector2(350, 350),
     );
-    await game.add(_currentBoss!);
+
+    await game.add(_currentBoss!);                                                                      //<-- Tạm ẩn boss để test
 
     _currentBossHealthBar = BossHealthBar(boss: _currentBoss!);
     await game.add(_currentBossHealthBar!);
@@ -149,11 +157,7 @@ class MapManager {
       size: Vector2(350, 350),
     );
     
-    await game.add(_currentBoss2!);
-    
-
-    //_currentBossHealthBar = BossHealthBar(boss: _currentBoss!);
-    //await game.add(_currentBossHealthBar!);
+    await game.add(_currentBoss2!);                                                                        //<-- Tạm ẩn boss để test
   }
   
 }

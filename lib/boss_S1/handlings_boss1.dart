@@ -9,7 +9,7 @@ import 'package:update1/boss_S1/animation_bullet_boss.dart';
 import 'package:update1/boss_S1/health_bar_is_boss.dart';
 import 'package:update1/boss_S1/bullet_boss.dart';
 
-import 'package:update1/teleportation_stone.dart';
+import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
 
 class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
   // Animation controller
@@ -217,6 +217,7 @@ class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
   // HÀM TẠO VIÊN ĐÁ TELEPORT
   void _spawnTeleportationStone() {
     final stone = TeleportationStone(
+      game : gameRef,
       position: Vector2(1635, 320), // Vị trí rơi ngay tại boss
       size: Vector2(120, 120), // Kích thước viên đá
     );

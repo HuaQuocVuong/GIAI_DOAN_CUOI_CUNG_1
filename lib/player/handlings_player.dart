@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:update1/processing_function/my_game.dart';
-import 'package:update1/player/click_marker.dart';
 
+import 'package:update1/player/click_marker.dart';
 import 'package:update1/player/health_bar_player.dart';
 import 'package:update1/player/player_respawn_manager.dart'; 
 import 'package:update1/player/animation_player.dart';
@@ -157,7 +157,7 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
 
         removeFromParent(); // Xóa khỏi game 
 
-        // Sau 2 giây -> gọi nhân vậ trở lại game
+        // Sau 2 giây -> gọi nhân vật trở lại game
         Future.delayed(const Duration(seconds: 2), () {
           if (!respawnManager.isRespawning) {
            respawnManager.startRespawn();

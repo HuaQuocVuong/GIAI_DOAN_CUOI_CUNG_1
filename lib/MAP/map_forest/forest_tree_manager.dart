@@ -15,7 +15,6 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(100, 200), type: TreeType.type10),
       TreeConfig(position: Vector2(150, 130), type: TreeType.type11),
 
-
       TreeConfig(position: Vector2(240, 160), type: TreeType.type2),
 
       TreeConfig(position: Vector2(380, 260), type: TreeType.type1),
@@ -38,7 +37,6 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(100, 600), type: TreeType.type1),
       TreeConfig(position: Vector2(200, 400), type: TreeType.type11),
 
-      //TreeConfig(position: Vector2(240, 550), type: TreeType.type3),
       TreeConfig(position: Vector2(200, 700), type: TreeType.type2),
       TreeConfig(position: Vector2(250, 640), type: TreeType.type11),
 
@@ -49,7 +47,7 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(870, 750), type: TreeType.type1),
       
 
-      TreeConfig(position: Vector2(1000, 160), type: TreeType.type12),
+      TreeConfig(position: Vector2(1000, 160), type: TreeType.type12), //Chest 
 
       // Khu vực trên góc phải map
       TreeConfig(position: Vector2(1120, 170), type: TreeType.type5),//1
@@ -60,21 +58,26 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(1310, 220), type: TreeType.type10),
 
       TreeConfig(position: Vector2(1500, 190), type: TreeType.type5),
-       TreeConfig(position: Vector2(1500, 190), type: TreeType.type10),
+      TreeConfig(position: Vector2(1500, 190), type: TreeType.type10),
 
-      TreeConfig(position: Vector2(1720, 240), type: TreeType.type4),
-       TreeConfig(position: Vector2(1720, 240), type: TreeType.type10),
-      //TreeConfig(position: Vector2(1800, 230), type: TreeType.type4),
       
+ 
       // Khu vực giữa - bên phải map
       TreeConfig(position: Vector2(1180, 660), type: TreeType.type5),
       TreeConfig(position: Vector2(1180, 660), type: TreeType.type11),
 
       TreeConfig(position: Vector2(1390, 700), type: TreeType.type4),
 
-      TreeConfig(position: Vector2(1630, 700), type: TreeType.type4),
+      TreeConfig(position: Vector2(1630, 790), type: TreeType.type15), //statue1
+      TreeConfig(position: Vector2(1800, 790), type: TreeType.type12), //Chest 
 
-      TreeConfig(position: Vector2(1830, 650), type: TreeType.type5),
+      
+
+      TreeConfig(position: Vector2(1630, 340), type: TreeType.type16),  //statue2
+      TreeConfig(position: Vector2(1750, 230), type: TreeType.type12), //Chest 
+      
+
+
       
     ];
 

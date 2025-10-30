@@ -25,7 +25,7 @@ import 'package:update1/boss_S2/animation_boss2.dart';
 //Lớp MyGame là lớp chính của game.
 //Kế thừa từ FlameGame quản lý toàn bộ vòng đời, render, update
 //Mixin HasCollisionDetection cho phép va chạm giữa các đối tượng (Bullet vs Target)
-class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
+class MyGame extends FlameGame with HasCollisionDetection ,HasKeyboardHandlerComponents {
   late PlayerTank player;            // người chơi
   late PlayerController playerController; // Controller xử lý input
   late DangerZoneSpawner dangerZoneSpawner; // Thêm spawn 

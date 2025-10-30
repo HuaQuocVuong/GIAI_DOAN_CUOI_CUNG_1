@@ -9,6 +9,8 @@ enum TreeType {
   type4, type5, type6,  //Kiểu cây 2
   type7, type8, type9,  //Kiểu cây 3
   type10, type11, type12,
+
+  type15, type16,
 }
 class TreeComponent extends SpriteAnimationComponent with HasGameRef {
   final Vector2 treePosition;
@@ -62,6 +64,11 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
 
             case TreeType.type12:
             return Vector2(80, 80);
+
+            case TreeType.type15:
+            return Vector2(400, 400);
+            case TreeType.type16:
+            return Vector2(400, 400);
           }
         }
 
@@ -115,6 +122,16 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
 
       case TreeType.type12:
       animation = await _createchest();
+
+
+
+      case TreeType.type15:
+      animation = await _statue1();
+      break;  
+
+      case TreeType.type16:
+      animation = await _statue2();
+      break;
 
 
     }
@@ -485,6 +502,33 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
     sprites.add(sprite6);
     return SpriteAnimation.spriteList(
       sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+  Future<SpriteAnimation> _statue1() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('Statue1_shadow1.png');
+    sprites.add(sprite1);
+
+    return SpriteAnimation.spriteList(
+    sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+
+  Future<SpriteAnimation> _statue2() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('Statue2_shadow2.png');
+    sprites.add(sprite1);
+
+
+
+    return SpriteAnimation.spriteList(
+    sprites,
       stepTime: animationSpeed,
       loop: true,
     );
