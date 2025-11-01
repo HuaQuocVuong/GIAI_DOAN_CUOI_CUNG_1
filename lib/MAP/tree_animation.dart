@@ -20,7 +20,7 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
   TreeComponent({
     required this.treePosition,
     required this.treeType,
-    this.animationSpeed = 0.5,
+    this.animationSpeed = 0.1,
     Vector2? size,
   }) : super(
           size: size ?? _getSizeByTreeType(treeType), //Kích thước cây
@@ -496,10 +496,16 @@ class TreeComponent extends SpriteAnimationComponent with HasGameRef {
     sprites.add(sprite3);
     final sprite4 = await Sprite.load('chest4.png');
     sprites.add(sprite4);
-    final sprite5 = await Sprite.load('chest5.png');
+    final sprite5 = await Sprite.load('chest4.png');
     sprites.add(sprite5);
-    final sprite6 = await Sprite.load('chest6.png');
+    final sprite6 = await Sprite.load('chest4.png');
     sprites.add(sprite6);
+    final sprite7 = await Sprite.load('chest4.png');
+    sprites.add(sprite7);
+    final sprite8 = await Sprite.load('chest5.png');
+    sprites.add(sprite8);
+    final sprite9 = await Sprite.load('chest6.png');
+    sprites.add(sprite9);
     return SpriteAnimation.spriteList(
       sprites,
       stepTime: animationSpeed,

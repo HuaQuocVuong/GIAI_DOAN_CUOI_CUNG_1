@@ -10,6 +10,7 @@ class BossBulletAnimations {
 
   late SpriteAnimation bulletFlyRight2;
   late SpriteAnimation bulletFlyLeft2;
+  
   late SpriteAnimation bulletHitEffectRight2;
   late SpriteAnimation bulletHitEffectLeft2;
 

@@ -25,7 +25,7 @@ class BossBullet extends SpriteAnimationComponent
 
   final int attackType; // Loại đòn tấn công (1: đòn thường, 2: đòn mạnh)
 
-  final double speed = 1400; // Tốc độ đạn 
+  final double speed = 2000; // Tốc độ đạn 
   late int damage;  // Sát thương gây ra cho player
 
   late BossBulletAnimations animations;   // Quản lý animations của đạn
@@ -43,11 +43,13 @@ class BossBullet extends SpriteAnimationComponent
     anchor: Anchor.center,  // Điểm neo ở trung tâm
     position: Vector2(1600, 300),  // Vị trí ban đầu
     size: Vector2(230, 230),  // Kích thước đạn
+    
   )
+  
    {
 
     //Đòn 1 20 dame, đòn 2 40 dame
-     damage = attackType == 1 ? 25 : 35; 
+     damage = attackType == 1 ? 25 : 45; 
 
     // Thêm hitbox hình tròn cho va chạm với bán kính 15 pixel
     add(CircleHitbox(
@@ -55,7 +57,7 @@ class BossBullet extends SpriteAnimationComponent
       anchor: Anchor.center, //PHÁT HIỆN PHẠM VI HIT BOX
       position: Vector2(110, 115),
     ));
-     //debugMode = true;
+     debugMode = true;
   }
 
   // Constructor mới - tạo đạn hướng về player
@@ -69,6 +71,7 @@ class BossBullet extends SpriteAnimationComponent
           anchor: Anchor.center,
           position: startPosition,
           size: Vector2(200, 200),
+
         ) {
 
     //Đòn 1 25 dame, đòn 2 40 dame
@@ -79,7 +82,10 @@ class BossBullet extends SpriteAnimationComponent
       anchor: Anchor.center,
       position: Vector2(120, 100),
     )); 
+    debugMode = true;
+    
   }
+  
   
 
   @override

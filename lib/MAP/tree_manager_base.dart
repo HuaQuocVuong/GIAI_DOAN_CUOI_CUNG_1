@@ -35,6 +35,5 @@ class TreeConfig {
   TreeConfig({
     required this.position, 
     required this.type
-   
   });
 }

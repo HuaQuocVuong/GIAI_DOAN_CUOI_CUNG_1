@@ -46,6 +46,7 @@ class BossHealthBar extends PositionComponent {
 
   // Phương thức tải tất cả sprite
   Future<void> loadHealthSprites() async {
+    
     _health0= await Sprite.load('tg_heathbar18.png');
     _health20= await Sprite.load('tg_heathbar17.png');
     _health25= await Sprite.load('tg_heathbar16.png');
@@ -64,6 +65,7 @@ class BossHealthBar extends PositionComponent {
     _health90= await Sprite.load('tg_heathbar3.png');
     _health95= await Sprite.load('tg_heathbar2.png');
     _health100= await Sprite.load('tg_heathbar1.png');
+    
     _currentHealthSprite = _health100;
     _spritesLoaded = true;
   }
@@ -83,49 +85,49 @@ class BossHealthBar extends PositionComponent {
   }
 
   // Cập nhật sprite theo tỉ lệ máu
-void _updateHealthSprite(){
-final healthRatio=boss.health/boss.maxHealth;
-final percentage=(healthRatio*100).ceil();
-if(percentage>=97){
-  _currentHealthSprite=_health100;
-}else if(percentage>=93){
-  _currentHealthSprite=_health95;
-}else if(percentage>=88){
-  _currentHealthSprite=_health90;
-}else if(percentage>=83){
-  _currentHealthSprite=_health85;
-}else if(percentage>=78){
-  _currentHealthSprite=_health80;
-}else if(percentage>=73){
-  _currentHealthSprite=_health75;
-}else if(percentage>=68){
-  _currentHealthSprite=_health70;
-}else if(percentage>=63){
-  _currentHealthSprite=_health65;
-}else if(percentage>=58){
-  _currentHealthSprite=_health60;
-}else if(percentage>=53){
-  _currentHealthSprite=_health55;
-}else if(percentage>=48){
-  _currentHealthSprite=_health50;
-}else if(percentage>=43){
-  _currentHealthSprite=_health45;
-}else if(percentage>=38){
-  _currentHealthSprite=_health40;
-}else if(percentage>=33){
-  _currentHealthSprite=_health35;
-}else if(percentage>=28){
-  _currentHealthSprite=_health30;
-}else if(percentage>=23){
-  _currentHealthSprite=_health25;
-}else if(percentage>=15){
-  _currentHealthSprite=_health20;
-}else if(percentage>0){
-  _currentHealthSprite=_health20;
-}else{
-  _currentHealthSprite=_health0;
-}
-}
+  void _updateHealthSprite(){
+  final healthRatio=boss.health/boss.maxHealth;
+  final percentage=(healthRatio*100).ceil();
+  if(percentage>=97){
+    _currentHealthSprite=_health100;
+  }else if(percentage>=93){
+    _currentHealthSprite=_health95;
+  }else if(percentage>=88){
+    _currentHealthSprite=_health90;
+  }else if(percentage>=83){
+    _currentHealthSprite=_health85;
+  }else if(percentage>=78){
+    _currentHealthSprite=_health80;
+  }else if(percentage>=73){
+    _currentHealthSprite=_health75;
+  }else if(percentage>=68){
+    _currentHealthSprite=_health70;
+  }else if(percentage>=63){
+    _currentHealthSprite=_health65;
+  }else if(percentage>=58){
+    _currentHealthSprite=_health60;
+  }else if(percentage>=53){
+    _currentHealthSprite=_health55;
+  }else if(percentage>=48){
+    _currentHealthSprite=_health50;
+  }else if(percentage>=43){
+    _currentHealthSprite=_health45;
+  }else if(percentage>=38){
+    _currentHealthSprite=_health40;
+  }else if(percentage>=33){
+    _currentHealthSprite=_health35;
+  }else if(percentage>=28){
+    _currentHealthSprite=_health30;
+  }else if(percentage>=23){
+    _currentHealthSprite=_health25;
+  }else if(percentage>=15){
+    _currentHealthSprite=_health20;
+  }else if(percentage>0){
+    _currentHealthSprite=_health20;
+  }else{
+    _currentHealthSprite=_health0;
+  }
+  }
 
    
 

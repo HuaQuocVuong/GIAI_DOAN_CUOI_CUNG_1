@@ -1,9 +1,11 @@
 import 'package:flame/game.dart';
 import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
+import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 import 'package:update1/main.dart';
 
 import 'package:update1/processing_function/my_game.dart';
+
 import 'package:update1/MAP/map_forest/forest_decor_manager.dart';
 import 'package:update1/MAP/map_poisonouns_forest/poisonouns_forest_decor_manager.dart';
 import 'package:update1/MAP/tree_manager_base.dart';
@@ -157,8 +159,7 @@ class MapManager {
       size: Vector2(350, 350),
     );
     
-    await game.add(_currentBoss2!);                                                                        //<-- Tạm ẩn boss để test
+    await game.add(_currentBoss2!);                                                                    //<-- Tạm ẩn boss để test
   }
-  
 }
 

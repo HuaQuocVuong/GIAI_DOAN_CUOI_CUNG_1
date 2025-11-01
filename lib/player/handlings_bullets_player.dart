@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
+import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 
 import 'package:update1/processing_function/my_game.dart';
@@ -7,6 +8,7 @@ import 'package:update1/processing_function/my_game.dart';
 import 'package:update1/player/animation_bullet_player.dart';
 
 import 'package:update1/boss_S1/handlings_boss1.dart';
+import 'package:update1/boss_S2/handlings_boss2.dart';
 
 class Bullet extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
@@ -16,13 +18,13 @@ class Bullet extends SpriteAnimationComponent
   static const double _stuckThreshold = 0.5;
   double _stuckTime = 0.0;
   bool _hasMoved = false;
+  bool _hasHit = false;
 
-  final double damage = 350000; //Dame bullet 30
+  final double damage = 35; //Dame bullet 3x
 
   late BulletAnimations animations; // THÊM ANIMATIONS
   final bool isFacingRight; // THÊM BIẾN XÁC ĐỊNH HƯỚNG
-  
-  
+
   Bullet({
     required Vector2 position,
     required this.direction,
@@ -38,6 +40,7 @@ class Bullet extends SpriteAnimationComponent
       anchor: Anchor.center,
       position: Vector2(60, 60),
     ) ..collisionType = CollisionType.passive);
+     debugMode = true;
   }
 
   @override
@@ -56,6 +59,8 @@ class Bullet extends SpriteAnimationComponent
   @override
   void update(double dt) {
     super.update(dt);
+
+    if (_hasHit) return;
 
     _lifeTime += dt;
     
@@ -97,21 +102,84 @@ class Bullet extends SpriteAnimationComponent
   ) {
     super.onCollisionStart(intersectionPoints, other);
     
-    // Nếu va chạm với Boss
+    if (_hasHit) return; // ĐÃ TRÚNG RỒI THÌ BỎ QUA
+
+     // THÊM KIỂM TRA CHO BOSS2
     if (other is Boss && other.isAlive) {
-      _hitBoss(other);
+      _hitBoss1(other);
+    } else if (other is Boss2 && other.isAlive) {
+      _hitBoss2(other);
     }
   }
-  void _hitBoss(Boss boss) {
-    // Gây sát thương cho boss
+  void _hitBoss1(Boss boss) {
+    if (_hasHit) return;
+    
+    _hasHit = true;
+    
+    // GÂY SÁT THƯƠNG CHO BOSS
     boss.takeDamage(damage);
     
-    // Tạo hiệu ứng nổ/impact
-    //_createImpactEffect();
-    
-    // Xóa viên đạn
-    removeFromParent();
+    // HIỆU ỨNG NỔ
+    _playHitEffect();
   }
-  
+
+   void _hitBoss2(Boss2 boss) {
+    if (_hasHit) return;
+    
+    _hasHit = true;
+    
+    // GÂY SÁT THƯƠNG CHO BOSS2
+    boss.takeDamage(damage);
+    
+    // HIỆU ỨNG NỔ
+    _playHitEffect();
+  }
+
+
+  // PHÁT HIỆU ỨNG NỔ
+  void _playHitEffect() {
+    // CHỌN ANIMATION NỔ THEO HƯỚNG
+    if (isFacingRight) {
+      animation = animations.bulletHitRight;
+    } else {
+      animation = animations.bulletHitLeft;
+    }
+    
+    // DỪNG DI CHUYỂN
+    _hasHit = true;
+    
+    // LOẠI BỎ HITBOX ĐỂ TRÁNH VA CHẠM TIẾP
+    for (final component in children.toList()) {
+      if (component is Hitbox) {
+        remove(component);
+      }
+    }
+    
+    // TỰ ĐỘNG XÓA SAU KHI ANIMATION NỔ KẾT THÚC
+    final effectDuration = _calculateHitEffectDuration();
+    add(RemoveEffect(delay: effectDuration));
+  }
+
+  // TÍNH THỜI GIAN HIỆU ỨNG NỔ
+  double _calculateHitEffectDuration() {
+    try {
+      if (animation == null || animation!.frames.isEmpty) return 0.25;
+      
+      double totalDuration = 0;
+      for (final frame in animation!.frames) {
+        totalDuration += frame.stepTime;
+      }
+      return totalDuration;
+    } catch (e) {
+      return 0.25;
+    }
+  }
+
+  // PHƯƠNG THỨC AN TOÀN ĐỂ REMOVE
+  void safeRemove() {
+    if (!_hasHit) {
+      _playHitEffect();
+    }
+  }
 }
 

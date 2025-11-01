@@ -86,7 +86,7 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
 
     tank = SpriteAnimationComponent(
       animation: animations.idle, // Animation mặc định khi đứng yên
-      size: Vector2.all(150), // Kích thước hiển thị
+      size: Vector2.all(170), // Kích thước hiển thị
       anchor: Anchor.center,  // Neo ở trung tâm
       position: Vector2.zero(), // Vị trí trong component
     );
@@ -102,6 +102,7 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
       anchor: Anchor.center,
       position: Vector2(-5, 30),  // Vị trí hit box
     )..collisionType = CollisionType.active);
+     debugMode = true;
   }
 
   // PHƯƠNG THỨC DI CHUYỂN BẰNG BÀN PHÍM

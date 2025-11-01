@@ -1,12 +1,14 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:update1/boss_S2/attack_boss2.dart';
-import 'package:update1/player/handlings_bullets_player.dart';
-import 'package:update1/processing_function/my_game.dart';
-import 'package:update1/boss_S2/animation_boss2.dart';
-import 'package:update1/player/handlings_player.dart';
-import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
+import 'package:update1/processing_function/my_game.dart';
+
+import 'package:update1/player/handlings_player.dart';
+import 'package:update1/player/handlings_bullets_player.dart';
+
+import 'package:update1/boss_S2/attack_boss2.dart';
+import 'package:update1/boss_S2/animation_boss2.dart';
+import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionCallbacks  {
   late Boss2Animations animations;
@@ -132,7 +134,8 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     takeDamage(bullet.damage);
     
     // Xóa đạn player sau khi trúng
-    bullet.removeFromParent();
+    //bullet.removeFromParent();
+     bullet.safeRemove();
   }
 
   // Phương thức kiểm tra player có chết không

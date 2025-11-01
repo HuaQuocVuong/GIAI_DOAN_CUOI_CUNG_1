@@ -70,6 +70,4 @@ class TeleportationStone extends PositionComponent with CollisionCallbacks {
     // Xoá đá dịch chuyển sau khi sử dụng (tuỳ chọn)
     removeFromParent();
   }
-
-
 }

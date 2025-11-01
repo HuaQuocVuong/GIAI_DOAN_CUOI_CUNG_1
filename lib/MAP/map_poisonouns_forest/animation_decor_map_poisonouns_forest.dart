@@ -14,7 +14,7 @@ enum GroundRocksType {
   type7,
   type8,
 
-  type10, type11, type12, //Water
+  type10, type11, type12, type13,
 
   type15,
 }
@@ -77,6 +77,9 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
       case GroundRocksType.type12:
         return Vector2(243, 250); 
 
+      case GroundRocksType.type13:
+        return Vector2(150, 150);
+
 
       case GroundRocksType.type15:
         return Vector2(200, 200); 
@@ -134,6 +137,9 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
        animation = await _createRockAnimation12();
        break;
 
+      case GroundRocksType.type13:
+       animation = await _createRockAnimation13();
+       break;
 
 
       case GroundRocksType.type15:
@@ -342,6 +348,19 @@ class GroundRocksComponent extends SpriteAnimationComponent with HasGameRef {
     final sprite6 = await Sprite.load('The_Temple_of_Teleportation6.png');
     sprites.add(sprite6);
 
+
+    return SpriteAnimation.spriteList(
+      sprites,
+      stepTime: animationSpeed,
+      loop: true,
+    );
+  }
+
+  Future<SpriteAnimation> _createRockAnimation13() async {
+    final sprites = <Sprite>[];
+
+    final sprite1 = await Sprite.load('Ruin_shadow2_3.png');
+    sprites.add(sprite1);
 
     return SpriteAnimation.spriteList(
       sprites,

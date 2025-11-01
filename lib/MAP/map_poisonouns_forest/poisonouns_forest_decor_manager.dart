@@ -10,7 +10,7 @@ class PoisonousDecorManager {
     //Base tree
     _DecorData(90, 570, GroundRocksType.type7, 142, 147), 
 
-    _DecorData(250, 170, GroundRocksType.type7, 142, 147), 
+    _DecorData(280, 170, GroundRocksType.type7, 142, 147), //
     _DecorData(420, 190, GroundRocksType.type7, 142, 147),
     _DecorData(570, 150, GroundRocksType.type7, 142, 147), 
 
@@ -24,9 +24,6 @@ class PoisonousDecorManager {
     _DecorData(1360, 670, GroundRocksType.type7, 142, 147), 
     _DecorData(1600, 670, GroundRocksType.type7, 142, 147), 
     _DecorData(1800, 620, GroundRocksType.type7, 142, 147),
-
-
-
 
     _DecorData(90, 150, GroundRocksType.type1, 150, 150),
     _DecorData(90, 150, GroundRocksType.type3, 200, 200),
@@ -45,14 +42,13 @@ class PoisonousDecorManager {
 
 
     _DecorData(570, 630, GroundRocksType.type15, 300, 300),
-
-
-
+    _DecorData(860, 600, GroundRocksType.type13, 300, 300),
     
-    _DecorData(970, 883, GroundRocksType.type1, 500, 130),
+    
+    _DecorData(970, 893, GroundRocksType.type1, 500, 130), //
     _DecorData(740, 891, GroundRocksType.type6, 70, 138),
     _DecorData(1200, 880, GroundRocksType.type6, 78, 147),
-    _DecorData(970, 870, GroundRocksType.type10, 300, 65),
+    _DecorData(970, 890, GroundRocksType.type10, 300, 65), //
 
 
     _DecorData(843, 800, GroundRocksType.type11, 96, 83), 
@@ -124,6 +120,8 @@ class PoisonousDecorManager {
         return 0.1;
       case GroundRocksType.type12:
         return 0.1;
+      case GroundRocksType.type13:
+        return 0.1;
 
       case GroundRocksType.type15:
         return 0.1;
@@ -164,6 +162,8 @@ class PoisonousDecorManager {
       case GroundRocksType.type11:
         return -1;
       case GroundRocksType.type12:
+        return -1;
+      case GroundRocksType.type13:
         return -1;
 
 

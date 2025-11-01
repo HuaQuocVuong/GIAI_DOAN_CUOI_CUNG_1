@@ -53,6 +53,7 @@ class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
       anchor: Anchor.center,
       position: Vector2(210, 250),  //Vị trí hit box
     ));
+    debugMode = true;
   }
 
   @override
