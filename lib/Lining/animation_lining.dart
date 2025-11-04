@@ -29,6 +29,8 @@ class LightningAnimationManager {
     sprites.add(sprite8);
     final sprite9 = await Sprite.load('lining1.9.png');
     sprites.add(sprite9);
+   
+    
 
     return SpriteAnimation.spriteList(
       sprites,

@@ -16,8 +16,8 @@ import 'package:update1/MAP/tree_animation.dart';
 import 'package:update1/player/handlings_player.dart';
 
 import 'package:update1/boss_S1/handlings_boss1.dart';
-import 'package:update1/boss_S1/animation_boss.dart';
-import 'package:update1/boss_S1/health_bar_is_boss.dart';
+import 'package:update1/boss_S1/animation_boss1.dart';
+import 'package:update1/boss_S1/health_bar_is_boss1.dart';
 
 import 'package:update1/boss_S2/handlings_boss2.dart';
 import 'package:update1/boss_S2/animation_boss2.dart';

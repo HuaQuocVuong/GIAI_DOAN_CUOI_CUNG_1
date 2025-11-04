@@ -13,7 +13,7 @@ import 'package:update1/MAP/map_forest/forest_tree_manager.dart';
 import 'package:update1/MAP/map_poisonouns_forest/poisonous_forest_tree_manager.dart';
 
 import 'package:update1/boss_S1/handlings_boss1.dart';
-import 'package:update1/boss_S1/health_bar_is_boss.dart';
+import 'package:update1/boss_S1/health_bar_is_boss1.dart';
 
 import 'package:update1/boss_S2/handlings_boss2.dart';
 

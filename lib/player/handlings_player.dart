@@ -102,7 +102,6 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
       anchor: Anchor.center,
       position: Vector2(-5, 30),  // Vị trí hit box
     )..collisionType = CollisionType.active);
-     debugMode = true;
   }
 
   // PHƯƠNG THỨC DI CHUYỂN BẰNG BÀN PHÍM

@@ -40,7 +40,6 @@ class Bullet extends SpriteAnimationComponent
       anchor: Anchor.center,
       position: Vector2(60, 60),
     ) ..collisionType = CollisionType.passive);
-     debugMode = true;
   }
 
   @override

@@ -66,7 +66,6 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       position: Vector2(235, 400),
       anchor: Anchor.center,
     ));
-    //debugMode = true;
 
     // THÊM THANH MÁU CHO BOSS2
     final healthBar = Boss2HealthBar(boss: this);

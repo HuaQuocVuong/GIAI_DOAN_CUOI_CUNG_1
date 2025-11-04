@@ -11,8 +11,8 @@ import 'package:update1/MAP/tree_animation.dart';
 
 import 'package:update1/player/handlings_player.dart';
 
-import 'package:update1/boss_S1/animation_bullet_boss.dart';
-import 'package:update1/boss_S1/animation_boss.dart';
+import 'package:update1/boss_S1/animation_bullet_boss1.dart';
+import 'package:update1/boss_S1/animation_boss1.dart';
 
 
 
@@ -57,7 +57,6 @@ class BossBullet extends SpriteAnimationComponent
       anchor: Anchor.center, //PHÁT HIỆN PHẠM VI HIT BOX
       position: Vector2(110, 115),
     ));
-     debugMode = true;
   }
 
   // Constructor mới - tạo đạn hướng về player
@@ -143,7 +142,7 @@ class BossBullet extends SpriteAnimationComponent
       _hitPlayer(other);  // Xử lý trúng player
     }
     
-    // Kiểm tra nếu đạn trúng vật cản
+    // Kiểm tra nếu đạn trúng vật cản (Thêm va chạm với Cây)
     if (other is TreeComponent) {
       _hitObstacle(); // Xử lý trúng vật cản
     }
