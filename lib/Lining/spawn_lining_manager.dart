@@ -12,8 +12,6 @@ import 'package:update1/processing_function/my_game.dart';
 
 import 'package:update1/player/handlings_player.dart';
 
-// Quản lý spawn Lining ngẫu nhiên
-// Sử dụng COMPOSITION: DangerZoneSpawner là một Component độc lập
 class DangerZoneSpawner extends Component with HasGameRef<MyGame> {
   final double spawnInterval; //Khoảng thời gian spawn tính theo giây
   double _timer = 0; //Bộ đếm thời gian tích lũy

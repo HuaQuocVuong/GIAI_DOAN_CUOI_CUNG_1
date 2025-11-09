@@ -15,7 +15,7 @@ import 'package:update1/boss_S1/animation_bullet_boss1.dart';
 import 'package:update1/boss_S1/animation_boss1.dart';
 
 
-
+//Kế thừa: SpriteAnimationComponent + CollisionCallbacks 
 class BossBullet extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
 
@@ -59,12 +59,12 @@ class BossBullet extends SpriteAnimationComponent
     ));
   }
 
-  // Constructor mới - tạo đạn hướng về player
+  // Constructor- tạo đạn hướng về player
   BossBullet.towardsPlayer({
-    required Vector2 startPosition,
-    required Vector2 playerPosition,
-    required this.isFacingRight,
-    this.attackType = 1,
+    required Vector2 startPosition, // Vị trí khởi tạo đạn
+    required Vector2 playerPosition, // Vị trí hiện tại của player
+    required this.isFacingRight, // Hướng animation
+    this.attackType = 1, 
   }) : direction = (playerPosition - startPosition).normalized(),
         super(
           anchor: Anchor.center,
@@ -84,8 +84,6 @@ class BossBullet extends SpriteAnimationComponent
     debugMode = true;
     
   }
-  
-  
 
   @override
   Future<void> onLoad() async {

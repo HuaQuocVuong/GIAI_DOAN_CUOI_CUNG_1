@@ -1,8 +1,12 @@
 import 'package:flame/components.dart';
+//PositionComponent: thành phần có vị trí trong Flame
+//Sprite: hình ảnh 2D trong Flame
+
 import 'package:flutter/material.dart';
 import 'package:update1/player/handlings_player.dart';
 
-/// Thanh máu cho PlayerTank - sử dụng ảnh sprite
+
+/// Thanh máu cho PlayerTank
 class HealthBar extends PositionComponent {
   final PlayerTank tank;
   bool _spritesLoaded = false;

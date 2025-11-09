@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:update1/processing_function/my_game.dart';
@@ -13,7 +14,7 @@ import 'package:update1/boss_S2/handlings_boss2.dart';
 class Bullet extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
   final Vector2 direction;
-  final double speed = 1000; 
+  final double speed = 1000; //Tốc độ đạn default:1000
   double _lifeTime = 0.0;
   static const double _stuckThreshold = 0.5;
   double _stuckTime = 0.0;
@@ -37,7 +38,7 @@ class Bullet extends SpriteAnimationComponent
   ) {
     add(CircleHitbox(
       radius: 25, //Bán kính viên đạn
-      anchor: Anchor.center,
+      anchor: Anchor.center,  
       position: Vector2(60, 60),
     ) ..collisionType = CollisionType.passive);
   }
@@ -49,6 +50,8 @@ class Bullet extends SpriteAnimationComponent
     //KHỞI TẠO VÀ TẢI ANIMATION
     animations = BulletAnimations();
     await animations.loadAllAnimations();
+    //FlameAudio.play('skill2.mp3');
+    //FlameAudio.play('swordhit1.mp3');
     
     //SET ANIMATION THEO HƯỚNG
     animation = animations.getFlyAnimation(isFacingRight);

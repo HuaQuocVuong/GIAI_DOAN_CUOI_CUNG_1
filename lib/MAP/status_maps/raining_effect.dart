@@ -38,7 +38,7 @@ class RainingAnimation {
       size: size,
       position: Vector2.zero(),
       anchor: Anchor.topLeft,
-    )..priority = 100; // Luôn có priority cao
+    )..priority = 100000; // Luôn có priority cao
   }
 
   // Phương thức lấy animation theo tên

@@ -14,57 +14,70 @@ import 'package:update1/player/health_bar_player.dart';
 import 'package:update1/player/player_respawn_manager.dart'; 
 import 'package:update1/player/animation_player.dart';
 
-// Định hướng của nhân vật: left, right
+// Định nghĩa enum để trừu tượng hóa hướng.
 enum TankDirection { left, right }
 
+//flame components
+//positioncomponent: thành phần có vị trí trong Flame.
+//HasGameRef: để truy cập instance game từ componen.
+//HasGameRef<MyGame>: tham chiếu đến class MyGame.
+//CollisionCallbacks: để xử lý va chạm.
+//...
+
+//PositionComponent + HasGameRef + CollisionCallbacks (Kế thừa).
 class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCallbacks {
   
-  // THÔNG SỐ NHÂN VẬT
-  int currentHealth = 200;   // Máu hiện tại
-  int maxHealth = 200;  // Máu tối đa
-  late HealthBar healthBar ;  // Thanh máu hiển thị
-  late PlayerRespawnManager respawnManager; // Quản lý hồi sinh
-  late PlayerAnimations animations; // Tất cả animation của player
+  
+  // THÔNG SỐ NHÂN VẬT + Trạng thái Nhân Vật.
+  //(Đóng gói) bằng cách ấn các biến thành private.
+  int currentHealth = 200;   // Máu hiện tại.
+  int maxHealth = 200;  // Máu tối đa.
+  late HealthBar healthBar ;  // Thanh máu hiển thị.
+  late PlayerRespawnManager respawnManager; // Quản lý hồi sinh.
+  late PlayerAnimations animations; // Tất cả animation của player.
   
   // THÀNH PHẦN HIỂN THỊ NHÂN VẬT
   late SpriteAnimationComponent tank;
   
   // DI CHUYỂN VÀ MỤC TIÊU
-  late Vector2 targetPosition;  // Vị trí mục tiêu di chuyển đến
-  final double baseSpeed = 30; // Tốc độ di chuyển cơ bản 
-  final double runSpeed = 80; // Tốc độ chạy  80
+  late Vector2 targetPosition;  // Vị trí mục tiêu di chuyển đến.
+  final double baseSpeed = 10; // Tốc độ di chuyển cơ bản.
+  final double runSpeed = 50; // Tốc độ chạy xx(px/s).
   double get currentSpeed => _isRunning ? runSpeed : baseSpeed;
   
-  bool _isMoving = false;  // Kiểm tra đang di chuyển hay không
-  bool _isAttacking = false;  // Kiểm tra đang tấn công hay không
-  int _comboCount = 0;  // Đếm số combo tấn công (0 hoặc 1)
-  bool _isTransitioning = false;  // Đang chuyển đổi animation hay không
 
-  String _currentDirection = 'right';  // Hướng hiện tại: 'left' hoặc 'right'
+  //Private
+  bool _isMoving = false;  // Kiểm tra đang di chuyển hay không.
+  bool _isAttacking = false;  // Kiểm tra đang tấn công hay không.
+  int _comboCount = 0;  // Đếm số combo tấn công (0 hoặc 1).
+  bool _isTransitioning = false;  // Đang chuyển đổi animation hay không.
 
-  // Hệ thống idle (animation khi đứng yên lâu)
-  double _idleTime = 0.0;  // Thời gian đã đứng yên
-  bool _isPlayingIdleSpecial = false;  // Kiểm đang chơi animation idle đặc biệt không
-  static const double _idleSpecialThreshold = 1.5; // Sau 5s đứng yên -> phát animation idle đặc biệt
+  String _currentDirection = 'right';  // Hướng hiện tại: 'left' hoặc 'right'.
+
+  // Hệ thống idle (animation khi đứng yên lâu).
+  double _idleTime = 0.0;  // Thời gian đã đứng yên.
+  bool _isPlayingIdleSpecial = false;  // Kiểm đang chơi animation idle đặc biệt không.
+  static const double _idleSpecialThreshold = 1.5; // Sau x(s) đứng yên -> phát animation idle đặc biệt.
   
-  // Hệ thống run (animation khi di chuyển liên tục)
-  double _moveTime = 0.0;  // Thời gian đã di chuyển liên tục
-  bool _isRunning = false;  // Đang ở trạng thái chạy
-  static const double _runThreshold = 0.65; // Sau x(s) di chuyển -> kích hoạt run
+  // Hệ thống run (animation khi di chuyển liên tục).
+  double _moveTime = 0.0;  // Thời gian đã di chuyển liên tục.
+  bool _isRunning = false;  // Đang ở trạng thái chạy.
+  static const double _runThreshold = 0.50; // Sau x(s) di chuyển -> kích hoạt run.
 
-  bool _isDead = false;  // Đã die hoàn toàn
-  bool _isDying = false; // Đang trong animation die
+  bool _isDead = false;  // Đã die hoàn toàn.
+  bool _isDying = false; // Đang trong animation die.
 
   // Di chuyển bằng bàn phím
   Vector2 _keyboardDirection = Vector2.zero();
   final double _baseKeyboardMoveSpeed = 350;
-  final double _runKeyboardMoveSpeed = 500; // Tăng 150 so với base
+  final double _runKeyboardMoveSpeed = 500; 
   double get _currentKeyboardMoveSpeed => _isRunning ? _runKeyboardMoveSpeed : _baseKeyboardMoveSpeed;
 
   // Khởi tạo người chơi
+  //Kế thừa: gọi constructor cha qua super để thiết lận anchor: điểm neo trung tâm.
   PlayerTank()
       : super(
-          anchor: Anchor.center,  // Điểm neo ở trung tâm
+          anchor: Anchor.center,  // Điểm neo ở trung tâm.
         );
 
   @override
@@ -76,7 +89,7 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
     await healthBar.loadHealthSprites();
     add(healthBar);
 
-    // Khởi tạo hệ thống quản lý hồi sinh 
+    // Khởi tạo hệ thống quản lý hồi sinh.
     respawnManager = PlayerRespawnManager(player: this);
     add(respawnManager);
 
@@ -96,7 +109,8 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
     position = Vector2(100, 280);
     targetPosition = position.clone();
 
-    // Thêm hitbox để va chạm
+    // Thêm hitbox để nhận va chạm 
+    // Tương tác qua interface CollisionCallBacks (Đa hình) 
     add(RectangleHitbox(
       size: Vector2(30, 80),  // Chiều dài/ rộng hit box 
       anchor: Anchor.center,
@@ -226,23 +240,20 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
     if (direction.x > 0) {
       if (_comboCount == 0) {
         _changeAnimation(animations.attackRight, loop: false);
-        FlameAudio.play('skill2.mp3');
-        FlameAudio.play('swordhit1.mp3');
+        FlameAudio.play('COMBO1_player.mp3');
       } else {
         _changeAnimation(animations.attackRightCombo, loop: false);
-        FlameAudio.play('skill1.mp3');
-        FlameAudio.play('swordhit1.mp3');
+        FlameAudio.play('COMBO2_player.mp3');
+        
       }
       _currentDirection = 'right';
     } else {
       if (_comboCount == 0) {
         _changeAnimation(animations.attackLeft, loop: false);
-        FlameAudio.play('skill2.mp3');
-        FlameAudio.play('swordhit1.mp3');
+        FlameAudio.play('COMBO1_player.mp3');
       } else {
         _changeAnimation(animations.attackLeftCombo, loop: false);
-        FlameAudio.play('skill1.mp3');
-        FlameAudio.play('swordhit1.mp3');
+        FlameAudio.play('COMBO2_player.mp3');
       }
       _currentDirection = 'left';
     }
@@ -530,7 +541,7 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
     // Không xoay nhân vật
   }
 
-  // GETTERS ĐỂ TRUY CẬP TRẠNG THÁI TỪ BÊN NGOÀI
+  // Cung cấp getters để truy cập an toàn từ bên ngoài (Đóng gói)
   bool get isAlive => respawnManager.canPlayerAct && !_isDead;  // Còn sống không
   bool get isDead => _isDead; // Đã chết không
   bool get isRespawning => respawnManager.isRespawning;  // Đang hồi sinh không
@@ -539,10 +550,11 @@ class PlayerTank extends PositionComponent with HasGameRef<MyGame>, CollisionCal
   bool get isDying => _isDying;  // Đang trong animation chết không
   bool get isRunning => _isRunning; // Đang ở trạng thái chạy
 
-  // THÊM METHOD NÀY Ở ĐÂY - SAU GETTERS, TRƯỚC DẤU } CUỐI CÙNG
+  // RESET TRẠNG THÁI CHẾT (KHI HỒI SINH)
+  // không cần biết chi tiết -> gọi hàm resetDeathState (Đóng gói + Trừu tượng)
   void resetDeathState() {
-    _isDead = false;
-    _isDying = false;
+    _isDead = false; // Reset trạng thái chết
+    _isDying = false; // Reset trạng hấp hối
     _isRunning = false; // Reset trạng thái chạy
     _moveTime = 0.0; // Reset thời gian di chuyển
     currentHealth = maxHealth;

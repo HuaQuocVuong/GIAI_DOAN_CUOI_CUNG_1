@@ -11,25 +11,26 @@ import 'package:update1/player/handlings_player.dart';
 class DangerZone extends SpriteAnimationComponent 
     with HasGameRef<MyGame>, CollisionCallbacks {
   
-  final double damageAmount;
-  final double lifeTime;
-  final LightningType lightningType;
+  final double damageAmount;  // Sát thương
+  final double lifeTime;  // Thời gian tồn tại (giây)
+  final LightningType lightningType; // Loại sét đánh
   
-  double _lifeTimer = 0;
-  PlayerTank? _currentPlayer;
+  double _lifeTimer = 0;  // Bộ đếm thời gian tồn tại
+  PlayerTank? _currentPlayer; // Tham chiếu đến player hiện tại trong vùng nguy hiểm
 
+  //Trừu tượng: Cho phép tạo nhiều Loại Lining khác nhau trong tương lai
   DangerZone({
-    required Vector2 position,
-    required this.lightningType,
-    this.damageAmount = 20,
-    this.lifeTime = 8.0,
+    required Vector2 position,  // Vị trí spawn
+    required this.lightningType,  /// Loại sét đánh (VÌ CHỬ PROJECT QUÁ LƯỜI NÊN CHỈ CÓ 1 LOẠI)
+    this.damageAmount = 20, // Mặc định gây 20 sát thương
+    this.lifeTime = 3.5,  // Mặc định tồn tại 8 giây
   }) : super(
           position: position,
           size: Vector2(300, 600), //Kích thước 
           
-          anchor: Anchor.center,
+          anchor: Anchor.center,  // Neo giữa
         );
-
+  // ĐA HÌNH: ghi đè (override) hành vi gốc của Flame Component
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -40,8 +41,8 @@ class DangerZone extends SpriteAnimationComponent
     // Thêm hitbox va chạm với người chơi
     add(RectangleHitbox(
       size: Vector2(250, 150), //hitbox
-      position: Vector2(165, 518), 
-      anchor: Anchor.center,
+      position: Vector2(165, 518),  //Vị trí hitbox phù hợp với animation
+      anchor: Anchor.center,  // Neo giữa
     )..collisionType = CollisionType.active);
   }
 
@@ -50,12 +51,14 @@ class DangerZone extends SpriteAnimationComponent
     super.update(dt);
     
     // Quản lý thời gian tồn tại
-    _lifeTimer += dt;
+    _lifeTimer += dt; // Cộng dồn thời gian
+    
+     // Nếu vượt quá thời gian tồn tại, xóa DangerZone khỏi game
     if (_lifeTimer >= lifeTime) {
-      removeFromParent();
+      removeFromParent();   // Xóa component khỏi game
     }
   }
-
+  //  
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
@@ -65,7 +68,7 @@ class DangerZone extends SpriteAnimationComponent
       _applyDamage(); // Gây sát thương ngay khi va chạm
     }
   }
-
+  // Gây sát thương liên tục khi vẫn trong vùng nguy hiểm
   @override
   void onCollisionEnd(PositionComponent other) {
     super.onCollisionEnd(other);
@@ -74,7 +77,7 @@ class DangerZone extends SpriteAnimationComponent
       _currentPlayer = null;
     }
   }
-
+  // Gây sát thương cho player trong vùng nguy hiểm
   void _applyDamage() {
     if (_currentPlayer != null && 
         _currentPlayer!.isMounted && 

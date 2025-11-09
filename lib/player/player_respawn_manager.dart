@@ -63,8 +63,6 @@ class PlayerRespawnManager extends Component with HasGameRef {
   
 
   // GETTERS để truy cập trạng thái từ bên ngoài
-  
-
   bool get canRespawn => _respawnCount < maxRespawnCount; // Kiểm tra xem còn có thể hồi sinh không
   int get remainingRespawns => maxRespawnCount - _respawnCount; // Get số lần hồi sinh còn lại
   int get respawnCount => _respawnCount;  // Get số lần đã hồi sinh

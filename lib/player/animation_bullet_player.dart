@@ -1,9 +1,16 @@
 import 'package:flame/components.dart';
 
+//Note: Flame components:
+// SpriteAnimation: Quản lý hoạt hình sprite
+// Sprite: Đại diện cho một hình ảnh 2D
+// SpriteAnimationComponent: Thành phần hiển thị hoạt hình sprite trong game
+// SpriteAnimationData: Cung cấp dữ liệu cấu hình cho hoạt hình sprite
+// SpriteAnimationFrameData: Cung cấp dữ liệu cho từng khung hình trong hoạt hình sprite
+
 class BulletAnimations {
+  
   late SpriteAnimation bulletFlyRight;
   late SpriteAnimation bulletFlyLeft;
-
   late SpriteAnimation bulletHitRight;
   late SpriteAnimation bulletHitLeft;
 
@@ -16,7 +23,7 @@ class BulletAnimations {
     bulletHitRight = await _createBulletHitrRightAnimation();
     bulletHitLeft = await _createBulletHitLeftAnimation();
   }
-  
+  //Animation đạn bay sang phải
   Future<SpriteAnimation> _createBulletFlyRightAnimation() async {
     final sprites = <Sprite>[];
     
@@ -34,11 +41,12 @@ class BulletAnimations {
     sprites.add(sprite6);
     return SpriteAnimation.spriteList(
       sprites,
-      stepTime: 0.05, // Tốc độ animation nhanh cho hiệu ứng bay
+      stepTime: 0.05,
       loop: true,
     );
   }
 
+  //Animation đạn bay sang trái
   Future<SpriteAnimation> _createBulletFlyLeftAnimation() async {
     final sprites = <Sprite>[];
     
@@ -63,6 +71,7 @@ class BulletAnimations {
     );
   }
 
+  // Animation đạn trúng bên phải mục tiêu 
   Future<SpriteAnimation> _createBulletHitrRightAnimation() async {
     final sprites = <Sprite>[];
 
@@ -86,6 +95,8 @@ class BulletAnimations {
       loop: true,
     );
   }
+
+  // Animation đạn trúng bên trái mục tiêu
   Future<SpriteAnimation> _createBulletHitLeftAnimation() async {
     final sprites = <Sprite>[];
 
@@ -109,9 +120,7 @@ class BulletAnimations {
     );
   }
 
-
-
-  // 🎬 PHƯƠNG THỨC ĐỂ LẤY ANIMATION THEO HƯỚNG
+  // Lấy animation bay dựa trên hướng
   SpriteAnimation getFlyAnimation(bool isFacingRight) {
     return isFacingRight ? bulletFlyRight : bulletFlyLeft;
   }

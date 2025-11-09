@@ -25,4 +25,4 @@ class MyApp extends StatelessWidget {
       home: StartScreen(), // Dùng StartScreen(Màn hình khởi động game)
     );
   }
-}
+} 

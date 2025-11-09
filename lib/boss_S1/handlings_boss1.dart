@@ -1,5 +1,7 @@
 import 'package:flame/collisions.dart';
-import 'package:flame/components.dart';
+
+import 'package:flame/components.dart'; 
+
 import 'package:flame_audio/flame_audio.dart';
 
 import 'package:update1/processing_function/my_game.dart';
@@ -10,6 +12,7 @@ import 'package:update1/boss_S1/health_bar_is_boss1.dart';
 import 'package:update1/boss_S1/handlings_bullet_boss1.dart';
 
 import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
+
 
 class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
   // Animation controller
@@ -25,7 +28,7 @@ class Boss extends SpriteAnimationComponent with HasGameRef<MyGame> {
 
   // Biến cho việc tấn công 
   double _attackTimer = 0;
-  static const double _attackInterval = 1.2;  // 1.2 giây tấn công 1 lần
+  static const double _attackInterval = 2.0;  // 1.2 giây tấn công 1 lần
   bool _isAttacking = false;
 
    // BIẾN QUẢN LÝ LUÂN PHIÊN ĐÒN TẤN CÔNG

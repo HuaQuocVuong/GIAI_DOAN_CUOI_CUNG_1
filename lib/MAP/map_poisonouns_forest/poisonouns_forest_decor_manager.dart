@@ -16,12 +16,18 @@ class PoisonousDecorManager {
 
     _DecorData(1150, 130, GroundRocksType.type7, 142, 147), 
     _DecorData(1290, 190, GroundRocksType.type7, 142, 147), 
-    _DecorData(1470, 160, GroundRocksType.type7, 142, 147), 
-    _DecorData(1600, 240, GroundRocksType.type7, 142, 147), 
+
+    _DecorData(1470, 160, GroundRocksType.type1, 150, 150),
+    _DecorData(1470, 160,GroundRocksType.type3, 200, 200),
+    //_DecorData(1470, 160, GroundRocksType.type7, 142, 147), 
+    _DecorData(1630, 240, GroundRocksType.type7, 142, 147), 
     _DecorData(1770, 200, GroundRocksType.type7, 116, 147), 
 
     _DecorData(1150, 630, GroundRocksType.type7, 142, 147), 
-    _DecorData(1360, 670, GroundRocksType.type7, 142, 147), 
+
+    _DecorData(1360, 670, GroundRocksType.type1, 150, 150),
+    _DecorData(1360, 670, GroundRocksType.type3, 200, 200),
+  
     _DecorData(1600, 670, GroundRocksType.type7, 142, 147), 
     _DecorData(1800, 620, GroundRocksType.type7, 142, 147),
 
@@ -57,6 +63,11 @@ class PoisonousDecorManager {
     _DecorData(989, 800, GroundRocksType.type11, 96, 83),
     _DecorData(1062, 800, GroundRocksType.type11, 96, 83), 
     _DecorData(1135, 800, GroundRocksType.type11, 96, 83),
+
+
+    _DecorData(90, 150, GroundRocksType.type1, 150, 150),
+    _DecorData(90, 150, GroundRocksType.type3, 200, 200),
+
 
 
 
@@ -132,9 +143,9 @@ class PoisonousDecorManager {
   // Xác định priority theo loại
   static int _getPriority(GroundRocksType type) {
     switch (type) {
-      case GroundRocksType.type1: // Background - vẽ trước
-        return -1;
-      case GroundRocksType.type2: // Animation - vẽ sau
+      case GroundRocksType.type1: // Background 
+        return -1; // Vẽ phía sau
+      case GroundRocksType.type2: 
         return -1;
       case GroundRocksType.type3:
         return -1;
@@ -172,7 +183,7 @@ class PoisonousDecorManager {
     }
   }
 
-  // Remove decor
+  // Xóa decor khỏi poisonous forest
   static Future<void> removeDecorFromGame(FlameGame game) async {
     final rocks = game.children.whereType<GroundRocksComponent>().toList();
     for (final rock in rocks) {

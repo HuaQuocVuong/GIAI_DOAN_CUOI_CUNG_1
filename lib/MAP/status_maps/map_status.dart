@@ -33,7 +33,10 @@ class BackgroundComponent extends SpriteComponent with HasGameRef {
     await super.onLoad();
     
     // LOAD BACKGROUND ĐẦU TIÊN NGAY KHI KHỞI TẠO
+    
+    
     await _loadInitialBackground();
+    FlameAudio.play('Carol_of_the_Bells.mp3');
     _resizeToFullScreen();
 
     // Khởi tạo animation mưa
@@ -135,7 +138,6 @@ class BackgroundComponent extends SpriteComponent with HasGameRef {
   void _addRainEffect() {
     _removeRainAnimation();
   
-    //FlameAudio.play('snoud_effect_raining.mp3');
     final rainAnim = _rainAnimationController!.getAnimationByName('raining');
     if (rainAnim != null) {
       _rainAnimation = SpriteAnimationComponent(

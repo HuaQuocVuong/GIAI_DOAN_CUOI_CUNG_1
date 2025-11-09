@@ -11,60 +11,64 @@ import 'package:update1/boss_S2/animation_boss2.dart';
 import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionCallbacks  {
+  
+  // Trừu tượng: tách riêng phần quản lý animation
   late Boss2Animations animations;
 
-  // Biến cho AI di chuyển
+  // Biến di chuyển
   bool isFacingRight = false;
-  bool isDead = false;
+  bool isDead = false;  // Biến trạng thái chết
 
-   // THÊM BIẾN NÀY - KIỂM TRA ĐANG CHẾT
-  bool _isDying = false;
+  // KIỂM TRA ĐANG CHẾT
+  bool _isDying = false;  // Biến theo dõi trạng thái chết
   
-   // Health system - THÊM VÀO
-  double maxHealth = 1000; // Có thể điều chỉnh
-  double health = 1000;
+   // Health system
+  double maxHealth = 2000; // Máu tối đa
+  double health = 2000; // Máu hiện tại
 
-  // Timers
-  double _moveTimer = 0;
-  double _attackTimer = 0;
+  // Đóng gói = private
+  double _moveTimer = 0; // Timer để theo dõi thời gian di chuyển
+  double _attackTimer = 0; // Timer để theo dõi thời gian tấn công
   double _phaseTimer = 0; // Timer để theo dõi thời gian chuyển phase
-  static const double _moveInterval = 0.01;
-  static const double _attackInterval = 0.8;
+  static const double _moveInterval = 0.01; // Thời gian giữa các lần di chuyển
+  static const double _attackInterval = 1.0; // Thời gian giữa các lần tấn công
   
   // Tốc độ và phase
   double _currentMoveSpeed = 180; // Tốc độ hiện tại
   final double _normalSpeed = 180; // Tốc độ bình thường
-  final double _fastSpeed = 360; // Tốc độ nhanh (gấp đôi)
-  final double _phaseChangeTime = 1.2; // Sau x giây chuyển run
+  final double _fastSpeed = 400; // Tốc độ nhanh (gấp đôi)
+  final double _phaseChangeTime = 1.0; // Sau x giây chuyển run
   
-  bool _isAttacking = false;
+  bool _isAttacking = false;  // Đang tấn công hay không
   bool _isFastPhase = false; // Đã chuyển sang phase chạy nhanh chưa
 
+  //TRỪU TƯỢNG: constructor cho phép tạo boss với vị trí và kích thước tùy ý
   Boss2({
-    required Vector2 position,
-    required Vector2 size,
+    required Vector2 position, // Vị trí khởi tạo boss
+    required Vector2 size, // Kích thước boss
   }) : super(
-    position: position, 
-    size: Vector2(500, 500)
+    position: position,  // Vị trí khởi tạo boss
+    size: Vector2(500, 500) // Kích thước boss
     );
 
+  //ĐA HÌNH: ghi đè (override) hành vi tải mặc định của component
   @override
   Future<void> onLoad() async {
     super.onLoad();
     
     // Load animations
-    animations = Boss2Animations();
-    await animations.loadAllAnimations();
+    animations = Boss2Animations(); // Khởi tạo quản lý animations
+    await animations.loadAllAnimations(); // Tải tất cả animations
     
     // Set initial animation
     animation = animations.idleLeft;
     anchor = Anchor.center;
 
-    // Thêm hitbox đơn giản
+    // Thêm hitbox cho boss (Trừu tượng vì sử dụng lớp CollisionCallBaks )
     add(RectangleHitbox(
-      size: Vector2(30, 200),
-      position: Vector2(235, 400),
-      anchor: Anchor.center,
+      size: Vector2(30, 200), // Hitbox cho boss
+      position: Vector2(235, 400), // Vị trí hitbox
+      anchor: Anchor.center, // Neo giữa
     ));
 
     // THÊM THANH MÁU CHO BOSS2
@@ -72,6 +76,8 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     gameRef.add(healthBar); 
   }
 
+
+  // Đa hình : ghi đè (override) hành vi cập nhật mặc định của component
   @override
   void update(double dt) {
     super.update(dt);
@@ -148,7 +154,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
     return gameRef.player.isDead || gameRef.player.isDying;
   }
 
-
+  // THÊM PHƯƠNG THỨC CHUYỂN SANG PHA CHẠY NHANH
   void _switchToFastPhase() {
      if (_isPlayerDead()) return;
     _isFastPhase = true;
@@ -159,13 +165,13 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       animation = isFacingRight ? animations.runRight : animations.runLeft;
     }
   }
-
+  //TRỪU TƯỢNG + ĐÓNG GÓI: hành vi di chuyển ẩn bên trong, bên ngoài chỉ cần gọi
   void _followPlayer() {
     // Kiểm tra nếu player chết thì không di chuyển
     if (_isPlayerDead()) return;
-    final player = gameRef.player;
-    final double distanceToPlayer = (player.position - position).length;
-    
+    final player = gameRef.player;  // Lấy tham chiếu đến player
+    final double distanceToPlayer = (player.position - position).length; // Khoảng cách đến player
+    // Di chuyển về phía player nếu khoảng cách lớn hơn ngưỡng
     if (distanceToPlayer > 100) {
       final Vector2 direction = (player.position - position).normalized();
       position += direction * _currentMoveSpeed * _moveInterval;
@@ -194,7 +200,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       }
     }
   }
-
+  // TRỪU TƯỢNG + ĐÓNG GÓI: hành vi tấn công ẩn bên trong, bên ngoài chỉ cần gọi
   void _attackPlayer() {
     // chỉ tấn công khi player còn sống
     if (_isPlayerDead()) {
@@ -212,7 +218,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       _isAttacking = false;
     }
   }
-  // THÊM PHƯƠNG THỨC THỰC HIỆN COMBO 2 ĐÒN
+  // THÊM PHƯƠNG THỨC THỰC HIỆN COMBO 2 ĐÒN  (Đa Hình)
   void _performAttackCombo() {
 
       // Chuyển animation tấn công
@@ -268,7 +274,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       }
     }
 
-
+    //
     void _updateFacingDirection(double directionX) {
       if (directionX > 0 && !isFacingRight) {
         isFacingRight = true;
@@ -277,7 +283,7 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
       }
     }
 
-    // THÊM PHƯƠNG THỨC NHẬN SÁT THƯƠNG
+    //ĐÓNG GÓI: boss tự xử lý sát thương nhận vào
     void takeDamage(double damage) {
       if (isDead) return;
       
@@ -317,15 +323,16 @@ class Boss2 extends SpriteAnimationComponent with HasGameRef<MyGame>, CollisionC
 
   // Phương thức để reset boss 
   void resetBoss() {
-    _isFastPhase = false;
-    _currentMoveSpeed = _normalSpeed;
-    _phaseTimer = 0;
-    _isAttacking = false;
-    _isDying = false; // THÊM DÒNG NÀY
+    _isFastPhase = false; // Reset phase
+    _currentMoveSpeed = _normalSpeed; // Reset tốc độ
+    _phaseTimer = 0;   // Reset timer
+    _isAttacking = false; // Reset trạng thái tấn công
+    _isDying = false; // Reset trạng thái chết
     health = maxHealth; // Reset máu
     animation = animations.idleLeft;
   }
   
+  // ĐÓNG GÓI: dùng getter để truy cập thay vì biến trực tiếp
   // Getter để kiểm tra trạng thái (nếu cần)
   bool get isInFastPhase => _isFastPhase;
   double get currentSpeed => _currentMoveSpeed;

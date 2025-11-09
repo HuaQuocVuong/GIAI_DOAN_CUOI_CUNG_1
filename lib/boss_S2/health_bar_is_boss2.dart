@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:update1/boss_S2/handlings_boss2.dart';
 
 /// Thanh máu cho Boss2
+/// 
 class Boss2HealthBar extends PositionComponent {
   final Boss2 boss;
   bool _spritesLoaded = false;

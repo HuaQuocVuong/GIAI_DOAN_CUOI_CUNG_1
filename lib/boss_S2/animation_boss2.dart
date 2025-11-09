@@ -5,7 +5,6 @@ class Boss2Animations {
   late SpriteAnimation idleRight;
   late SpriteAnimation idleLeft;
 
-  
   late SpriteAnimation walkRight;
   late SpriteAnimation walkLeft;
 

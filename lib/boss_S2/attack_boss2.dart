@@ -115,9 +115,10 @@ class Boss2Attack extends SpriteAnimationComponent
     // KIỂM TRA VA CHẠM VỚI PLAYER TANK
     if (other is PlayerTank) {
       _hitPlayer(other);  // Xử lý trúng player
+      FlameAudio.play('blood-splatter-1.mp3');
     }
     
-    // Kiểm tra nếu đòn đánh trúng vật cản
+    // Kiểm tra nếu đòn đánh trúng vật cản (Hiện Vẫn Chưa Thêm Xử lý Vật Cản)
     if (other is TreeComponent) {
       _hitObstacle(); // Xử lý trúng vật cản
     }

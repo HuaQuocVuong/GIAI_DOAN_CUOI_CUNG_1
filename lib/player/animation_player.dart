@@ -42,7 +42,7 @@ class PlayerAnimations {
 
     transitionRight = await _createTransitionRightAnimation();
     transitionLeft = await _createTransitionLeftAnimation();
-    
+
     idleSpecial = await _createIdleSpecialAnimation();
     death = await _createDeathAnimation();
   }
@@ -91,7 +91,7 @@ class PlayerAnimations {
     return SpriteAnimation.spriteList(
       sprites,
       stepTime: 0.2,
-      loop: false, // 🎬 CHẠY 1 LẦN RỒI DỪNG
+      loop: false, //  CHẠY 1 LẦN RỒI DỪNG
     );
 
   }
@@ -336,13 +336,13 @@ class PlayerAnimations {
     return SpriteAnimation(loadedFrames, loop: false);
   }
 
-  // 🎬 PHƯƠNG THỨC HỖ TRỢ TẠO FRAME
+  // PHƯƠNG THỨC HỖ TRỢ TẠO FRAME
   Future<SpriteAnimationFrame> _createFrame(String path, double stepTime) async {
     final sprite = await Sprite.load(path);
     return SpriteAnimationFrame(sprite, stepTime);
   }
 
-  // 🎬 Phương thức tiện ích để lấy animation theo tên
+  // Phương thức tiện ích để lấy animation theo tên
   SpriteAnimation? getAnimationByName(String name) {
     switch (name) {
       case 'idle':

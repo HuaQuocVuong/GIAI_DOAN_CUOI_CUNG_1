@@ -40,7 +40,7 @@ class LightningAnimationManager {
   }
 
 /*
-  // ANIMATION SÉT LOẠI 2 - 9 ẢNH
+ 
   static Future<SpriteAnimation> createLightningType2Animation() async {
     final sprites = <Sprite>[];
 
@@ -70,7 +70,7 @@ class LightningAnimationManager {
     );
   }
 
-  // ANIMATION SÉT LOẠI 3 - 9 ẢNH
+
   static Future<SpriteAnimation> createLightningType3Animation() async {
     final sprites = <Sprite>[];
 

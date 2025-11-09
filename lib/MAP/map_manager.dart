@@ -1,33 +1,36 @@
 import 'package:flame/game.dart';
-import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
-import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 import 'package:update1/main.dart';
-
 import 'package:update1/processing_function/my_game.dart';
 
-import 'package:update1/MAP/map_forest/forest_decor_manager.dart';
-import 'package:update1/MAP/map_poisonouns_forest/poisonouns_forest_decor_manager.dart';
+import 'package:update1/MAP/tree_animation.dart';
 import 'package:update1/MAP/tree_manager_base.dart';
-import 'package:update1/MAP/map_forest/forest_tree_manager.dart';
+
+import 'package:update1/MAP/map_forest/forest_decor_manager.dart';
 import 'package:update1/MAP/map_poisonouns_forest/poisonous_forest_tree_manager.dart';
+import 'package:update1/MAP/map_forest/forest_tree_manager.dart';
+
+import 'package:update1/MAP/map_poisonouns_forest/poisonouns_forest_decor_manager.dart';
+
+import 'package:update1/Teleportation_Stone/handlings_teleportation_stone.dart';
 
 import 'package:update1/boss_S1/handlings_boss1.dart';
 import 'package:update1/boss_S1/health_bar_is_boss1.dart';
 
 import 'package:update1/boss_S2/handlings_boss2.dart';
-
+import 'package:update1/boss_S2/health_bar_is_boss2.dart';
 
 import 'package:update1/MAP/status_maps/map_status.dart';
-import 'package:update1/MAP/tree_animation.dart';
 
+// ĐỊNH NGHĨA LOẠI MAP
 enum GameMapType {
   forest,
   poisonousforest,
 }
 
+// CLASS CHÍNH QUẢN LÝ TOÀN BỘ MAP
 class MapManager {
-  final MyGame game;
+  final MyGame game; // tham chiếu đến game chính
   GameMapType currentMap = GameMapType.forest;
   BackgroundComponent? _background;
 
@@ -42,12 +45,14 @@ class MapManager {
   
   MapManager(this.game);
   
+  //HÀM CHUYỂN MAP CHÍNH
   Future<void> switchMap(GameMapType newMap) async {
-    await _removeCurrentMap();
-    currentMap = newMap;
-    await _loadNewMap();
+    await _removeCurrentMap();  // xoá map cũ
+    currentMap = newMap;   // cập nhật loại map
+    await _loadNewMap();   // tải map mới
   }
   
+  //XOÁ MAP CŨ TRƯỚC KHI TẢI MAP MỚI
   Future<void> _removeCurrentMap() async {
 
      // XÓA TẤT CẢ ĐÁ DỊCH CHUYỂN KHI CHUYỂN MAP
@@ -64,7 +69,7 @@ class MapManager {
     // Chờ một frame để đảm bảo trees đã được remove
     await Future.delayed(Duration.zero);
 
-    // Remove decor theo map hiện tại
+    // XOÁ DECOR THEO MAP HIỆN TẠI
     switch (currentMap) {
       case GameMapType.forest:
         await ForestDecorManager.removeDecorFromGame(game);
@@ -74,25 +79,25 @@ class MapManager {
         break;
     }
     
-    // XOÁ BOSS KHI CHUYỂN SANG MAP KHÁC
+    // XOÁ BOSS 1 KHI CHUYỂN SANG MAP KHÁC
     if (_currentBoss != null) {
       _currentBoss!.removeFromParent();
       _currentBoss = null;
     }
 
-    // THÊM XÓA BOSS2
+    // THÊM XÓA BOSS2 khi chuyển ngược map 1
     if (_currentBoss2 != null) {
       _currentBoss2!.removeFromParent();
       _currentBoss2 = null;
     }
-
+    // XOÁ HEALTH BAR CỦA BOSS 1 KHI CHUYỂN MAP
     if (_currentBossHealthBar != null) {
       _currentBossHealthBar!.removeFromParent();
       _currentBossHealthBar = null;
     }
   }
 
-  
+  // TẢI MAP MỚI SAU KHI XOÁ MAP CŨ
   Future<void> _loadNewMap() async {
     switch (currentMap) {
       case GameMapType.forest:
@@ -121,9 +126,6 @@ class MapManager {
     // THÊM DECOR CHO FOREST MAP (Hiện tại chưa có)
     await ForestDecorManager.addDecorToGame(game);
 
-
- 
-    
     // THÊM BOSS CHỈ Ở FOREST
     _currentBoss = Boss(
       position: Vector2(1700, 300),
@@ -158,7 +160,7 @@ class MapManager {
       position: Vector2(1700, 300),
       size: Vector2(350, 350),
     );
-    
+    // Thêm boss2 vào game
     await game.add(_currentBoss2!);                                                                    //<-- Tạm ẩn boss để test
   }
 }

@@ -15,7 +15,9 @@ import 'package:update1/MAP/map_manager.dart';
 import 'package:update1/processing_function/my_game.dart';
 
 //Lớp PlayerController: xử lý input tap của người chơi
-//Kế thừa PositionComponent + mixin TapCallbacks xử lý thao tác chuột
+//Kế thừa PositionComponent
+//Sử dụng KeyboardHandler để xử lý sự kiện bàn phím
+//Sử dụng TapCallbacks để xử lý sự kiện chạm (tap)
 class PlayerController extends PositionComponent with KeyboardHandler ,TapCallbacks {
   final PlayerTank player; // Tham chiếu đến người chơi 
   final FlameGame game;    // Tham chiếu tới game instance
@@ -47,10 +49,10 @@ class PlayerController extends PositionComponent with KeyboardHandler ,TapCallba
     }
     
     // Cập nhật trạng thái các phím
-    _isWPressed = keysPressed.contains(LogicalKeyboardKey.keyW);
-    _isSPressed = keysPressed.contains(LogicalKeyboardKey.keyS);
-    _isAPressed = keysPressed.contains(LogicalKeyboardKey.keyA);
-    _isDPressed = keysPressed.contains(LogicalKeyboardKey.keyD);
+    _isWPressed = keysPressed.contains(LogicalKeyboardKey.keyW);  //Đi lên
+    _isSPressed = keysPressed.contains(LogicalKeyboardKey.keyS);  //Đi xuống
+    _isAPressed = keysPressed.contains(LogicalKeyboardKey.keyA);  //Đi trái
+    _isDPressed = keysPressed.contains(LogicalKeyboardKey.keyD);  //Đi phải
 
     // Tính hướng di chuyển dựa trên các phím được nhấn
     Vector2 direction = Vector2.zero();
