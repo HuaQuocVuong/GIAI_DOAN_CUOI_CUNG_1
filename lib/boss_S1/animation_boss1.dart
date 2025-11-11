@@ -195,7 +195,9 @@ class BossAnimations {
      final loadedFrames = await Future.wait(frames);
      return SpriteAnimation(loadedFrames, loop: false);
   }
-  // 🎬 PHƯƠNG THỨC HỖ TRỢ TẠO FRAME
+
+
+  // PHƯƠNG THỨC HỖ TRỢ TẠO FRAME
   Future<SpriteAnimationFrame> _createFrame(String path, double stepTime) async {
     final sprite = await Sprite.load(path);
     return SpriteAnimationFrame(sprite, stepTime);

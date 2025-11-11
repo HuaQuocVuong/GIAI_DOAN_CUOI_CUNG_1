@@ -286,75 +286,51 @@ class Boss2Animations {
   }
 
   Future <SpriteAnimation> _createDieRight() async {
-    final sprites = <Sprite> [];
+    final frames = <Future<SpriteAnimationFrame>>[];
 
-    final sprite1 = await Sprite.load('tg2_dier1.png');
-    sprites.add(sprite1);
-    final sprite2 = await Sprite.load('tg2_dier2.png');
-    sprites.add(sprite2);
-    final sprite3 = await Sprite.load('tg2_dier3.png');
-    sprites.add(sprite3);
-    final sprite4 = await Sprite.load('tg2_dier4.png');
-    sprites.add(sprite4);
-    final sprite5 = await Sprite.load('tg2_dier5.png');
-    sprites.add(sprite5);
-    final sprite6 = await Sprite.load('tg2_dier6.png');
-    sprites.add(sprite6);
+    frames.add(_createFrame('tg2_dier1.png', 0.4));
+    frames.add(_createFrame('tg2_dier2.png', 0.4));
+    frames.add(_createFrame('tg2_dier3.png', 0.4));
+    frames.add(_createFrame('tg2_dier4.png', 0.4));
+    frames.add(_createFrame('tg2_dier5.png', 0.4));
+    frames.add(_createFrame('tg2_dier6.png', 0.4));
+    
+    frames.add(_createFrame('tgdeathl12.png', 0.05));
+    frames.add(_createFrame('tgdeathl13.png', 0.04));
+    frames.add(_createFrame('tgdeathl14.png', 0.03));
+    frames.add(_createFrame('tgdeathl15.png', 0.02));
+    frames.add(_createFrame('tgdeathl16.png', 0.03));
+    frames.add(_createFrame('tgdeathl17.png', 0.02));
 
-    final sprite7 = await Sprite.load('tgdeathl12.png');
-    sprites.add(sprite7);
-    final sprite8 = await Sprite.load('tgdeathl13.png');
-    sprites.add(sprite8);
-    final sprite9 = await Sprite.load('tgdeathl14.png');
-    sprites.add(sprite9);
-    final sprite10 = await Sprite.load('tgdeathl15.png');
-    sprites.add(sprite10);
-    final sprite11 = await Sprite.load('tgdeathl16.png');
-    sprites.add(sprite11);
-    final sprite12 = await Sprite.load('tgdeathl17.png');
-    sprites.add(sprite12);
-
-    return SpriteAnimation.spriteList(
-      sprites, 
-      stepTime: 0.5,
-      loop: true);
+    final loadedFrames = await Future.wait(frames);
+    return SpriteAnimation(loadedFrames, loop: false);
   }
 
   Future <SpriteAnimation> _createDieLeft() async {
-    final sprites = <Sprite> [];
+    final frames = <Future<SpriteAnimationFrame>>[];
 
-    final sprite1 = await Sprite.load('tg2_diel1.png');
-    sprites.add(sprite1);
-    final sprite2 = await Sprite.load('tg2_diel2.png');
-    sprites.add(sprite2);
-    final sprite3 = await Sprite.load('tg2_diel3.png');
-    sprites.add(sprite3);
-    final sprite4 = await Sprite.load('tg2_diel4.png');
-    sprites.add(sprite4);
-    final sprite5 = await Sprite.load('tg2_diel5.png');
-    sprites.add(sprite5);
-    final sprite6 = await Sprite.load('tg2_diel6.png');
-    sprites.add(sprite6);
+    frames.add(_createFrame('tg2_diel1.png', 0.4));
+    frames.add(_createFrame('tg2_diel2.png', 0.4));
+    frames.add(_createFrame('tg2_diel3.png', 0.4));
+    frames.add(_createFrame('tg2_diel4.png', 0.4));
+    frames.add(_createFrame('tg2_diel5.png', 0.4));
+    frames.add(_createFrame('tg2_diel6.png', 0.4));
 
+    frames.add(_createFrame('tgdeathl12.png', 0.05));
+    frames.add(_createFrame('tgdeathl13.png', 0.04));
+    frames.add(_createFrame('tgdeathl14.png', 0.03));
+    frames.add(_createFrame('tgdeathl15.png', 0.02));
+    frames.add(_createFrame('tgdeathl16.png', 0.03));
+    frames.add(_createFrame('tgdeathl17.png', 0.02));
 
-    final sprite7 = await Sprite.load('tgdeathl12.png');
-    sprites.add(sprite7);
-    final sprite8 = await Sprite.load('tgdeathl13.png');
-    sprites.add(sprite8);
-    final sprite9 = await Sprite.load('tgdeathl14.png');
-    sprites.add(sprite9);
-    final sprite10 = await Sprite.load('tgdeathl15.png');
-    sprites.add(sprite10);
-    final sprite11 = await Sprite.load('tgdeathl16.png');
-    sprites.add(sprite11);
-    final sprite12 = await Sprite.load('tgdeathl17.png');
-    sprites.add(sprite12);
+    final loadedFrames = await Future.wait(frames);
+    return SpriteAnimation(loadedFrames, loop: false);
+  }
 
-
-    return SpriteAnimation.spriteList(
-      sprites, 
-      stepTime: 0.5,
-      loop: true);
+  // PHƯƠNG THỨC HỖ TRỢ TẠO FRAME
+  Future<SpriteAnimationFrame> _createFrame(String path, double stepTime) async {
+    final sprite = await Sprite.load(path);
+    return SpriteAnimationFrame(sprite, stepTime);
   }
 
   // Phương thức tiện ích để lấy animation theo tên
@@ -386,8 +362,8 @@ class Boss2Animations {
         return attackLeft2;
 
       case 'dieRight':
-      return dieRight;
-        case 'dieLeft':
+        return dieRight;
+      case 'dieLeft':
         return dieLeft;
 
       default:

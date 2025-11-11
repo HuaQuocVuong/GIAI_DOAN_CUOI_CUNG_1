@@ -19,7 +19,7 @@ class DangerZoneSpawner extends Component with HasGameRef<MyGame> {
   double _timer = 0;
 
   DangerZoneSpawner({
-    this.spawnInterval = 0.5, 
+    this.spawnInterval = 0.1, 
     this.delayLightning2 = 0.3,
     this.delayLightning3 = 0.6,
   });

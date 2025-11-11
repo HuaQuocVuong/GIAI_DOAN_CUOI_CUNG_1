@@ -45,7 +45,7 @@ class DangerZone extends SpriteAnimationComponent
       anchor: Anchor.center,  // Neo giữa
     )..collisionType = CollisionType.active);
 
-    debugMode = true;
+    //debugMode = true;
   }
 
   @override
