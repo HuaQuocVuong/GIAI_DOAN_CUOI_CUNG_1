@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 
 enum LightningType {
   type1,
-  //type2,  
-  //type3,
+  type2,  
+  type3,
 }
 
 class LightningAnimationManager {
@@ -39,29 +39,29 @@ class LightningAnimationManager {
     );
   }
 
-/*
- 
   static Future<SpriteAnimation> createLightningType2Animation() async {
     final sprites = <Sprite>[];
 
-    final sprite1 = await Sprite.load('lightning1_type2.png');
+    final sprite1 = await Sprite.load('lining2.1.png');
     sprites.add(sprite1);
-    final sprite2 = await Sprite.load('lightning2_type2.png');
+    final sprite2 = await Sprite.load('lining2.2.png');
     sprites.add(sprite2);
-    final sprite3 = await Sprite.load('lightning3_type2.png');
+    final sprite3 = await Sprite.load('lining2.3.png');
     sprites.add(sprite3);
-    final sprite4 = await Sprite.load('lightning4_type2.png');
+    final sprite4 = await Sprite.load('lining2.4.png');
     sprites.add(sprite4);
-    final sprite5 = await Sprite.load('lightning5_type2.png');
+    final sprite5 = await Sprite.load('lining2.5.png');
     sprites.add(sprite5);
-    final sprite6 = await Sprite.load('lightning6_type2.png');
+    final sprite6 = await Sprite.load('lining2.6.png');
     sprites.add(sprite6);
-    final sprite7 = await Sprite.load('lightning7_type2.png');
+    final sprite7 = await Sprite.load('lining2.7.png');
     sprites.add(sprite7);
-    final sprite8 = await Sprite.load('lightning8_type2.png');
+    final sprite8 = await Sprite.load('lining2.8.png');
     sprites.add(sprite8);
-    final sprite9 = await Sprite.load('lightning9_type2.png');
+    final sprite9 = await Sprite.load('lining2.9.png');
     sprites.add(sprite9);
+   
+    
 
     return SpriteAnimation.spriteList(
       sprites,
@@ -69,28 +69,27 @@ class LightningAnimationManager {
       loop: true,
     );
   }
-
 
   static Future<SpriteAnimation> createLightningType3Animation() async {
     final sprites = <Sprite>[];
 
-    final sprite1 = await Sprite.load('lightning1_type3.png');
+    final sprite1 = await Sprite.load('lining3.1.png');
     sprites.add(sprite1);
-    final sprite2 = await Sprite.load('lightning2_type3.png');
+    final sprite2 = await Sprite.load('lining3.2.png');
     sprites.add(sprite2);
-    final sprite3 = await Sprite.load('lightning3_type3.png');
+    final sprite3 = await Sprite.load('lining3.3.png');
     sprites.add(sprite3);
-    final sprite4 = await Sprite.load('lightning4_type3.png');
+    final sprite4 = await Sprite.load('lining3.4.png');
     sprites.add(sprite4);
-    final sprite5 = await Sprite.load('lightning5_type3.png');
+    final sprite5 = await Sprite.load('lining3.5.png');
     sprites.add(sprite5);
-    final sprite6 = await Sprite.load('lightning6_type3.png');
+    final sprite6 = await Sprite.load('lining3.6.png');
     sprites.add(sprite6);
-    final sprite7 = await Sprite.load('lightning7_type3.png');
+    final sprite7 = await Sprite.load('lining3.7.png');
     sprites.add(sprite7);
-    final sprite8 = await Sprite.load('lightning8_type3.png');
+    final sprite8 = await Sprite.load('lining3.8.png');
     sprites.add(sprite8);
-    final sprite9 = await Sprite.load('lightning9_type3.png');
+    final sprite9 = await Sprite.load('lining3.9.png');
     sprites.add(sprite9);
 
     return SpriteAnimation.spriteList(
@@ -99,16 +98,16 @@ class LightningAnimationManager {
       loop: true,
     );
   }
-*/
+
   // HÀM TỔNG ĐỂ LẤY ANIMATION THEO TYPE
   static Future<SpriteAnimation> getAnimationByType(LightningType type) async {
     switch (type) {
       case LightningType.type1:
         return await createLightningType1Animation();
-      //case LightningType.type2:
-      //  return await createLightningType2Animation();
-      //case LightningType.type3:
-      //  return await createLightningType3Animation();
+      case LightningType.type2:
+        return await createLightningType2Animation();
+      case LightningType.type3:
+        return await createLightningType3Animation();
     }
   }
 }

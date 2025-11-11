@@ -23,7 +23,6 @@ class PoisonousForestTreeManager extends TreeManagerBase {
       // Khu vực trên góc phải map
       TreeConfig(position: Vector2(1180, 160), type:TreeType.type7),
       TreeConfig(position: Vector2(1320, 220), type:TreeType.type8),
-      //TreeConfig(position: Vector2(1500, 190), type:TreeType.type9),
       TreeConfig(position: Vector2(1650, 270), type:TreeType.type7),
       TreeConfig(position: Vector2(1800, 230), type:TreeType.type9),
 

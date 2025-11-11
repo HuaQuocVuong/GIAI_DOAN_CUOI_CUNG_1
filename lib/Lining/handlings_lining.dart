@@ -44,6 +44,8 @@ class DangerZone extends SpriteAnimationComponent
       position: Vector2(165, 518),  //Vị trí hitbox phù hợp với animation
       anchor: Anchor.center,  // Neo giữa
     )..collisionType = CollisionType.active);
+
+    debugMode = true;
   }
 
   @override

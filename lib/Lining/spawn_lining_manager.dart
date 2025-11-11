@@ -13,50 +13,79 @@ import 'package:update1/processing_function/my_game.dart';
 import 'package:update1/player/handlings_player.dart';
 
 class DangerZoneSpawner extends Component with HasGameRef<MyGame> {
-  final double spawnInterval; //Khoảng thời gian spawn tính theo giây
-  double _timer = 0; //Bộ đếm thời gian tích lũy
-  
-  // Constructor với giá trị mặc định 2 giây spawn một lần
-  DangerZoneSpawner({this.spawnInterval = 0.5});
+  final double spawnInterval;
+  final double delayLightning2;
+  final double delayLightning3;
+  double _timer = 0;
+
+  DangerZoneSpawner({
+    this.spawnInterval = 0.5, 
+    this.delayLightning2 = 0.3,
+    this.delayLightning3 = 0.6,
+  });
 
   @override
   void update(double dt) {
     super.update(dt);
     
-    _timer += dt; //Tích lũy thời gian delta-time
+    _timer += dt;
 
     if (_timer >= spawnInterval) {
-      _spawnDangerZone();  //Gọi spawn Lining khi đủ thời gian
-      _timer = 0; //Reset bộ đếm về 0 bắt đầu lại
+      _spawnDangerZones();
+      _timer = 0;
     }
   }
 
-  //Spawn DangerZone tại vị trí ngẫu nhiên -> Trừu tượng
-  // Phương thức private ẩn đi logic spawn phức tạp, chỉ expose interface đơn giản
-  void _spawnDangerZone() {
-    final random = Random(); //Tạo generator ngẫu nhiên
-
-    
-    // Random ngẫu nhiên theo chiều ngang và cố định chiều dọc để phù hợp với animation
-    //randomX: từ 150 đến (chiều rộng game - 300) để tránh spawn sát mép trái/phải
-    final randomX = 150 + random.nextDouble() * (gameRef.size.x - 300); // Tránh mép trái phải
-    final startY = 280; // Sát trên cùng màn hình
-    
-
+  void _spawnDangerZones() {
+    final random = Random();
+    final List<double> usedPositions = [];
    
-    // Lining có thể là nhiều loại khác nhau
-    final dangerZone = DangerZone(
-      position: Vector2(randomX, startY as double ),
-      lightningType: LightningType.type1, // CHỈ CÓ TYPE1
-      damageAmount: 30, //Gây 10 sát thương mỗi lần
-      lifeTime: 3, // Tồn tại trong 3 giây
+    // Spawn sấm sét thứ nhất
+    final randomX1 = 150 + random.nextDouble() * (gameRef.size.x - 300);
+    usedPositions.add(randomX1);
+
+    final dangerZone1 = DangerZone(
+      position: Vector2(randomX1, 280),
+      lightningType: LightningType.type1,
+      damageAmount: 30,
+      lifeTime: 3,
     );
-
-    // Thêm DangerZone vào game như một component độc lập
-    // Sử dụng composition để quản lý đối tượng ko kế thừa
-    gameRef.add(dangerZone);
-
-    // Phát âm thanh khi spawn lightning
+    gameRef.add(dangerZone1);
     FlameAudio.play('snoud_lining.mp3');
+
+    // SPAWN SẤM SÉT THỨ HAI - TYPE2 (SAU DELAY)
+    Future.delayed(Duration(milliseconds: (delayLightning2 * 1000).round()), () {
+      double randomX2;
+      do {
+        randomX2 = 150 + random.nextDouble() * (gameRef.size.x - 300);
+      } while ((randomX2 - randomX1).abs() < 250);
+      usedPositions.add(randomX2);
+
+      final dangerZone2 = DangerZone(
+        position: Vector2(randomX2, 280),
+        lightningType: LightningType.type2,
+        damageAmount: 30,
+        lifeTime: 3,
+      );
+      gameRef.add(dangerZone2);
+      FlameAudio.play('snoud_lining.mp3');
+    });
+
+    // SPAWN SẤM SÉT THỨ BA - TYPE3 (SAU DELAY) - ĐÃ SỬA LỖI
+    Future.delayed(Duration(milliseconds: (delayLightning3 * 1000).round()), () {
+      double randomX3;
+      do {
+        randomX3 = 150 + random.nextDouble() * (gameRef.size.x - 300);
+      } while (usedPositions.any((pos) => (pos - randomX3).abs() < 250));
+
+      final dangerZone3 = DangerZone(
+        position: Vector2(randomX3, 280),
+        lightningType: LightningType.type3,
+        damageAmount: 30,
+        lifeTime: 3,
+      );
+      gameRef.add(dangerZone3);
+      FlameAudio.play('snoud_lining.mp3');
+    });
   }
-}
+} 

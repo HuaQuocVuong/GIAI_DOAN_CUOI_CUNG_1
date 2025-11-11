@@ -5,7 +5,6 @@ import 'package:update1/Teleportation_Stone/teleportation_stone_animation.dart';
 import  'package:update1/player/handlings_player.dart';
 import 'package:update1/processing_function/my_game.dart';
 
-
 class TeleportationStone extends PositionComponent with CollisionCallbacks {
   late final TeleportationStoneAnimation _animation;
   late final SpriteAnimationComponent _animationComponent;

@@ -19,7 +19,6 @@ class PoisonousDecorManager {
 
     _DecorData(1470, 160, GroundRocksType.type1, 150, 150),
     _DecorData(1470, 160,GroundRocksType.type3, 200, 200),
-    //_DecorData(1470, 160, GroundRocksType.type7, 142, 147), 
     _DecorData(1630, 240, GroundRocksType.type7, 142, 147), 
     _DecorData(1770, 200, GroundRocksType.type7, 116, 147), 
 
