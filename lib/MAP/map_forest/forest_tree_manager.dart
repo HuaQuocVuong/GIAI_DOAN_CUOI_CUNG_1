@@ -16,6 +16,7 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(150, 130), type: TreeType.type11),
 
       TreeConfig(position: Vector2(240, 160), type: TreeType.type2),
+      
 
       TreeConfig(position: Vector2(380, 260), type: TreeType.type1),
       TreeConfig(position: Vector2(380, 260), type: TreeType.type10),
@@ -25,10 +26,12 @@ class ForestTreeManager extends TreeManagerBase {
 
       TreeConfig(position: Vector2(600, 200), type: TreeType.type1),
       TreeConfig(position: Vector2(600, 200), type: TreeType.type10),
+      TreeConfig(position: Vector2(650, 190), type: TreeType.type11),
 
       TreeConfig(position: Vector2(750, 320), type: TreeType.type2),
 
       TreeConfig(position: Vector2(800, 220), type: TreeType.type1),
+      TreeConfig(position: Vector2(840, 100), type: TreeType.type11), //
 
       TreeConfig(position: Vector2(800, 220), type: TreeType.type10),
       TreeConfig(position: Vector2(700, 220), type: TreeType.type11),
@@ -44,29 +47,37 @@ class ForestTreeManager extends TreeManagerBase {
       TreeConfig(position: Vector2(450, 600), type: TreeType.type11),
 
       TreeConfig(position: Vector2(720, 730), type: TreeType.type2),
-      TreeConfig(position: Vector2(870, 750), type: TreeType.type1),
       
+
+      TreeConfig(position: Vector2(870, 750), type: TreeType.type1),
 
       TreeConfig(position: Vector2(1000, 160), type: TreeType.type12), //Chest 
 
       // Khu vực trên góc phải map
       TreeConfig(position: Vector2(1120, 170), type: TreeType.type5),//1
       TreeConfig(position: Vector2(1120, 170), type: TreeType.type10),
+      TreeConfig(position: Vector2(1150, 150), type: TreeType.type11), //
       
 
       TreeConfig(position: Vector2(1310, 220), type: TreeType.type4),
       TreeConfig(position: Vector2(1310, 220), type: TreeType.type10),
+      TreeConfig(position: Vector2(1350, 190), type: TreeType.type11),//
 
       TreeConfig(position: Vector2(1500, 190), type: TreeType.type5),
       TreeConfig(position: Vector2(1500, 190), type: TreeType.type10),
+      TreeConfig(position: Vector2(1550, 140), type: TreeType.type11),
+     
 
       
  
       // Khu vực giữa - bên phải map
+      
       TreeConfig(position: Vector2(1180, 660), type: TreeType.type5),
-      TreeConfig(position: Vector2(1180, 660), type: TreeType.type11),
+      TreeConfig(position: Vector2(1200, 550), type: TreeType.type11),
+      
 
       TreeConfig(position: Vector2(1390, 700), type: TreeType.type4),
+      TreeConfig(position: Vector2(1440, 560), type: TreeType.type11),
 
       TreeConfig(position: Vector2(1630, 790), type: TreeType.type15), //statue1
       TreeConfig(position: Vector2(1800, 790), type: TreeType.type12), //Chest 

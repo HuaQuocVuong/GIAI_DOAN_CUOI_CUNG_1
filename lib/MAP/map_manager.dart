@@ -1,4 +1,6 @@
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:update1/MAP/audio_manager.dart';
 
 import 'package:update1/main.dart';
 import 'package:update1/processing_function/my_game.dart';
@@ -50,6 +52,7 @@ class MapManager {
     await _removeCurrentMap();  // xoá map cũ
     currentMap = newMap;   // cập nhật loại map
     await _loadNewMap();   // tải map mới
+    await AudioManager.playMapMusic(currentMap); // Sử dụng AudioManager
   }
   
   //XOÁ MAP CŨ TRƯỚC KHI TẢI MAP MỚI
@@ -108,6 +111,7 @@ class MapManager {
         break;
     }
   }
+ 
   
   //MAP FOREST
   Future<void> _loadForestMap() async {
@@ -131,9 +135,7 @@ class MapManager {
       position: Vector2(1700, 300),
       size: Vector2(350, 350),
     );
-
-    await game.add(_currentBoss!);                                                                      //<-- Tạm ẩn boss để test
-
+    await game.add(_currentBoss!);                                                                      //<-- Tạm ẩn boss để test  
     _currentBossHealthBar = BossHealthBar(boss: _currentBoss!);
     await game.add(_currentBossHealthBar!);
   }
@@ -150,10 +152,9 @@ class MapManager {
 
     // Thêm cây cho map rừng độc - SỬ DỤNG TREE MANAGER MỚI
     await _poisonousTreeManager.addTreesToGame(game);
-    
-
     // THÊM DECOR NƯỚC VÀO POISONOUS FOREST MAP
     await PoisonousDecorManager.addDecorToGame(game);
+    
 
     // THÊM BOSS CHỈ Ở FOREST
     _currentBoss2 = Boss2(
@@ -161,7 +162,7 @@ class MapManager {
       size: Vector2(350, 350),
     );
     // Thêm boss2 vào game
-    await game.add(_currentBoss2!);                                                                    //<-- Tạm ẩn boss để test
+    await game.add(_currentBoss2!);                                                            //<-- Tạm ẩn boss để test
   }
 }
 

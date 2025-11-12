@@ -25,7 +25,7 @@ class BossBullet extends SpriteAnimationComponent
 
   final int attackType; // Loại đòn tấn công (1: đòn thường, 2: đòn mạnh)
 
-  final double speed = 2000; // Tốc độ đạn 
+  final double speed = 2555; // Tốc độ đạn 
   late int damage;  // Sát thương gây ra cho player
 
   late BossBulletAnimations animations;   // Quản lý animations của đạn

@@ -21,7 +21,7 @@ class Bullet extends SpriteAnimationComponent
   bool _hasMoved = false;
   bool _hasHit = false;
 
-  final double damage = 3500000; //Dame bullet 3x
+  final double damage = 35; //Dame bullet 3x
 
   late BulletAnimations animations; // THÊM ANIMATIONS
   final bool isFacingRight; // THÊM BIẾN XÁC ĐỊNH HƯỚNG

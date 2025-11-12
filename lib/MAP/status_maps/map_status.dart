@@ -36,7 +36,7 @@ class BackgroundComponent extends SpriteComponent with HasGameRef {
     
     
     await _loadInitialBackground();
-    FlameAudio.play('Carol_of_the_Bells.mp3');
+    //FlameAudio.play('Carol_of_the_Bells.mp3');
     _resizeToFullScreen();
 
     // Khởi tạo animation mưa

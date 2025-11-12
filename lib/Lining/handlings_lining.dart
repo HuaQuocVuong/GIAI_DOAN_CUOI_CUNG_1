@@ -40,8 +40,8 @@ class DangerZone extends SpriteAnimationComponent
     
     // Thêm hitbox va chạm với người chơi
     add(RectangleHitbox(
-      size: Vector2(250, 150), //hitbox
-      position: Vector2(165, 518),  //Vị trí hitbox phù hợp với animation
+      size: Vector2(150, 580), //hitbox
+      position: Vector2(160, 310),  //Vị trí hitbox phù hợp với animation
       anchor: Anchor.center,  // Neo giữa
     )..collisionType = CollisionType.active);
 
